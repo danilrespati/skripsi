@@ -47,7 +47,6 @@ def searchTarget():
                 bbox = (x, y, w, h)
                 x = int(bbox[0] + (bbox[2] / 2))
                 y = int(bbox[1] + (bbox[3] / 2))
-                print(x,y)
                 break
         i += 1
         if(i == 10):
@@ -96,6 +95,7 @@ print('(ESC) Exit\n(c) Change target')
 
 while stat:
     pos["x"], pos["y"] = searchTarget()
+    print(pos)
     angle["pan"], angle["tilt"] = posToAngle(pos)
     sendAngle(stat, target, pos, angle)
     k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
