@@ -49,7 +49,11 @@ def searchTarget():
                 yy = int(bbox[1] + (bbox[3] / 2))
                 search = 0
                 break
-        k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
+        k = cv2.waitKey(10) & 0xff 
+        if k == ord('c'):
+            target = input('New target: ')
+            print('\nTarget: {0}'.format(target))
+            print('(ESC) Exit\n(c) Change target')
         if k == 27:
             stat = 0
             sendAngle(stat, target, pos, angle)
@@ -98,10 +102,9 @@ print('(ESC) Exit\n(c) Change target')
 
 while stat:
     pos["x"], pos["y"] = searchTarget()
-    print(pos)
     angle["pan"], angle["tilt"] = posToAngle(pos)
     sendAngle(stat, target, pos, angle)
-    k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
+    k = cv2.waitKey(10) & 0xff  
     if k == ord('c'):
         target = input('New target: ')
         print('\nTarget: {0}'.format(target))
@@ -110,7 +113,6 @@ while stat:
         stat = 0
         sendAngle(stat, target, pos, angle)
 
-# Do a bit of cleanup
 print("\n[INFO] Exiting Program and cleanup stuff")
 cam.release()
 rec.release()
