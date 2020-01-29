@@ -32,6 +32,7 @@ def initCam():
 
 def searchTarget():
     global target
+    global rec
     search = 1
     bbox = None
     while search:
@@ -96,7 +97,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
-rec = cv2.VideoWriter('/home/skripsi/data/video/static/video.avi', cv2.VideoWriter_fourcc(
+rec = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 target = input('Target: ')
 print('(ESC) Exit\n(c) Change target')
