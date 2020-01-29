@@ -45,15 +45,13 @@ def searchTarget():
             if (subjects[label] == target):
                 cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
-                x = int(bbox[0] + (bbox[2] / 2))
-                y = int(bbox[1] + (bbox[3] / 2))
+                xx = int(bbox[0] + (bbox[2] / 2))
+                yy = int(bbox[1] + (bbox[3] / 2))
                 break
         i += 1
         if(i == 10):
-            x = None
-            y = None
             break
-    return x, y
+    return xx, yy
 
 def sendAngle(stat, target, pos, angle):
     path = "/var/www/html/skripsi"
