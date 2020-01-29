@@ -31,7 +31,6 @@ def initCam():
     return cap
 
 def searchTarget():
-    i = 0
     bbox = None
     while True:
         ret, frame = cam.read()
@@ -48,8 +47,8 @@ def searchTarget():
                 xx = int(bbox[0] + (bbox[2] / 2))
                 yy = int(bbox[1] + (bbox[3] / 2))
                 break
-        i += 1
-        if(i == 10):
+        k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
+        if k == 27:
             break
     return xx, yy
 
