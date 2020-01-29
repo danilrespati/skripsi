@@ -47,11 +47,10 @@ def searchTarget():
                 bbox = (x, y, w, h)
                 x = int(bbox[0] + (bbox[2] / 2))
                 y = int(bbox[1] + (bbox[3] / 2))
+                print(x,y)
                 break
         i += 1
-        print("Cycle {0}, not detected\n".format(i))
         if(i == 10):
-            print("Re-cycle\n")
             x = None
             y = None
             break
