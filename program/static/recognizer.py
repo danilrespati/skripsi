@@ -105,7 +105,7 @@ while stat:
         print('\nTarget: {0}'.format(target))
         print('(ESC) Exit\n(c) Change target')
     if k == 27:
-        sendCoordinate(0, target, x, y, sx)
+        sendAngle(stat, target, pos, angle)
         stat = 0
 
 # Do a bit of cleanup
