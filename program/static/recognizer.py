@@ -53,8 +53,8 @@ def searchTarget():
         if k == 27:
             stat = 0
             sendAngle(stat, target, pos, angle)
-            xx = None
-            yy = None
+            xx = pos["x"]
+            yy = pos["y"]
             break
     return xx, yy
 
