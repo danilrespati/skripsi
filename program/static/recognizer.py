@@ -31,6 +31,7 @@ def initCam():
     return cap
 
 def searchTarget():
+    global target
     search = 1
     bbox = None
     while search:
