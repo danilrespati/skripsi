@@ -49,6 +49,10 @@ def searchTarget():
                 break
         k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
         if k == 27:
+            stat = 0
+            sendAngle(stat, target, pos, angle)
+            xx = None
+            yy = None
             break
     return xx, yy
 
@@ -101,8 +105,8 @@ while stat:
         print('\nTarget: {0}'.format(target))
         print('(ESC) Exit\n(c) Change target')
     if k == 27:
-        sendAngle(stat, target, pos, angle)
         stat = 0
+        sendAngle(stat, target, pos, angle)
 
 # Do a bit of cleanup
 print("\n[INFO] Exiting Program and cleanup stuff")
