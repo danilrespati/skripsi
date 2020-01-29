@@ -24,10 +24,10 @@ def sendCoordinate(stat, target, x, y, sx):
     # print("Sending {0}'s position: {1}, {2} \n".format(target, x, y))
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('/home/pi/Skripsi/repository/data/trainer/trainer.yml')
-faceCascade = cv2.CascadeClassifier('/home/pi/Skripsi/repository'
-                                    '/data/classifier/haarcascades'
-                                    '/haarcascade_frontalface_default.xml')
+recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
+faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+                                    '/data/classifier/lbpcascades'
+                                    '/lbpcascade_frontalface.xml')
 
 stat = 1
 font = cv2.FONT_HERSHEY_SIMPLEX
