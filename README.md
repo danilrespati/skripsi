@@ -1,2 +1,1 @@
 # skripsi
-perubahan
