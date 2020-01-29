@@ -48,6 +48,7 @@ def searchTarget():
                 cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
                 drawRectangle(frame, bbox)
+                rec.write(frame)
                 xx = int(bbox[0] + (bbox[2] / 2))
                 yy = int(bbox[1] + (bbox[3] / 2))
                 search = 0
