@@ -108,6 +108,7 @@ while stat:
         print('(ESC) Exit\n(c) Change target')
     if k == 27:
         stat = 0
+        sendAngle(stat, target, pos, angle)
 
 # Do a bit of cleanup
 print("\n[INFO] Exiting Program and cleanup stuff")
