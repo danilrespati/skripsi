@@ -36,7 +36,7 @@ def searchTarget():
     while True:
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
-        vid.write(frame)
+        rec.write(frame)
         cv2.imshow('frame', frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
@@ -90,7 +90,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
-rec = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(
+rec = cv2.VideoWriter('/home/skripsi/data/video/static/video.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 target = input('Target: ')
 print('(ESC) Exit\n(c) Change target')
@@ -111,5 +111,5 @@ while stat:
 # Do a bit of cleanup
 print("\n[INFO] Exiting Program and cleanup stuff")
 cam.release()
-vid.release()
+rec.release()
 cv2.destroyAllWindows()
