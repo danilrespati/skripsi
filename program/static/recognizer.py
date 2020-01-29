@@ -100,6 +100,7 @@ rec = cv2.VideoWriter('/home/skripsi/data/video/static/video.avi', cv2.VideoWrit
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 target = input('Target: ')
 print('(ESC) Exit\n(c) Change target')
+sendAngle(stat, target, pos, angle)
 
 while stat:
     pos["x"], pos["y"] = searchTarget()
