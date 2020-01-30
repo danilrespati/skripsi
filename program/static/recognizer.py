@@ -47,11 +47,11 @@ def searchTarget():
                 bbox = (x, y, w, h)
                 drawRectangle(frame, bbox)
                 drawText(frame, subjects[label], x, y-5)
-                rec.write(frame)
                 xx = int(bbox[0] + (bbox[2] / 2))
                 yy = int(bbox[1] + (bbox[3] / 2))
                 search = 0
                 break
+        rec.write(frame)
         cv2.imshow('frame', frame)
         k = cv2.waitKey(10) & 0xff 
         if k == ord('c'):
