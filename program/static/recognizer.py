@@ -99,7 +99,9 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
-rec = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(
+if os.path.exists("/home/pi/skripsi/data/video/static/video.avi"):
+    os.remove("/home/pi/skripsi/data/video/static/video.avi")
+rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/video.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 target = input('Target: ')
 print('(ESC) Exit\n(c) Change target')
