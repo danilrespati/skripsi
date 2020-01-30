@@ -39,7 +39,6 @@ def searchTarget():
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
         rec.write(frame)
-        cv2.imshow('frame', frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for(x, y, w, h) in faces:
@@ -53,6 +52,7 @@ def searchTarget():
                 yy = int(bbox[1] + (bbox[3] / 2))
                 search = 0
                 break
+        cv2.imshow('frame', frame)
         k = cv2.waitKey(10) & 0xff 
         if k == ord('c'):
             target = input('New target: ')
