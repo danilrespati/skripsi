@@ -98,7 +98,7 @@ faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/lbpcascade_frontalface.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
-subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
+subjects = ['Label start from 1', 'Danil', 'Yoga', 'kosong', 'kosong']
 cam = initCam()
 if os.path.exists("/home/pi/skripsi/data/video/static/video.avi"):
     os.remove("/home/pi/skripsi/data/video/static/video.avi")
