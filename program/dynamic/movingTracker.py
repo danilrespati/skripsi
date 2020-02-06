@@ -96,7 +96,7 @@ def trackTarget(bbox):
             cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
 
-def offsetCheck(bbox, angle, servo):
+def offsetCheck(bbox, ang, servo):
     global angle
     x = int(bbox[0] + (bbox[2] / 2))
     y = int(bbox[1] + (bbox[3] / 2))
