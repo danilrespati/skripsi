@@ -144,11 +144,11 @@ def offsetCheck(bbox, ang, servo):
 servo = {"pan":13, "tilt":11}
 angle = {"pan":90, "tilt":90}
 
-faceCascade = cv2.CascadeClassifier('/home/pi/Skripsi/repository'
-                                    '/data/classifier/haarcascades'
-                                    '/haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+                                    '/data/classifier/lbpcascades'
+                                    '/lbpcascade_frontalface.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('/home/pi/Skripsi/repository/data/trainer/trainer.yml')
+recognizer.read('/home/pi/skripsi/data/trainer/dynamic/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
 rec = cv2.VideoWriter('video.avi', cv2.VideoWriter_fourcc(
