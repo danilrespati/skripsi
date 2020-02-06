@@ -72,10 +72,12 @@ def searchTarget():
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for(x, y, w, h) in faces:
             label, confidence = recognizer.predict(gray[y:y+h, x:x+w])
-            if (subjects[label] == target):
+            if(subjects[label] == target):
                 cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
                 break
+        if(bbox != None):
+            break
         i += 1
         print("Cycle {0}, not detected\n".format(i))
         if(i == 10):
