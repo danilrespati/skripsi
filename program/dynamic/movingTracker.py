@@ -103,21 +103,21 @@ def offsetCheck(bbox, ang, servo):
     x = int(bbox[0] + (bbox[2] / 2))
     y = int(bbox[1] + (bbox[3] / 2))
     centerBox = {
-    "xMax":250,
-    "yMax":150,
-    "xMin":150,
-    "yMin":100
-    }
+        "xMax":250,
+        "yMax":150,
+        "xMin":150,
+        "yMin":100
+        }
     servoRange = {
-    "panMax":150,
-    "tiltMax":140,
-    "panMin":30,
-    "tiltMin":40
-    }
+        "panMax":150,
+        "tiltMax":140,
+        "panMin":30,
+        "tiltMin":40
+        }
     inc = {
-    "pan":5,
-    "tilt":10
-    }
+        "pan":5,
+        "tilt":10
+        }
     if (x > centerBox["xMax"]):
         if angle["pan"] <= servoRange["panMin"]:
             angle["pan"] = servoRange["panMin"]
