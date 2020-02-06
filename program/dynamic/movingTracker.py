@@ -179,6 +179,7 @@ while stat == 1:
     k = cv2.waitKey(10) & 0xff
     if k == 27:
         stat = 0
+        break
 
 cv2.destroyAllWindows()
 rec.release()
