@@ -143,6 +143,7 @@ def offsetCheck(bbox, ang, servo):
             angle["tilt"] += inc["tilt"]
             moveServo(servo["tilt"], angle["tilt"])
 
+stat = 1
 servo = {"pan":13, "tilt":11}
 angle = {"pan":90, "tilt":90}
 
@@ -155,7 +156,7 @@ subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/movingTracker.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
-while True:
+while stat:
     print(angle, servo)
     tracker = cv2.TrackerKCF_create()
     target, angle["pan"], angle["tilt"] = initUrl()
@@ -164,6 +165,9 @@ while True:
     bbox = searchTarget()
     print(bbox)
     trackTarget(bbox)
+    k = cv2.waitKey(10) & 0xff
+    if k == 27:
+        stat = 0
 
 cv2.destroyAllWindows()
 vid.release()
