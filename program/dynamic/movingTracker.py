@@ -159,6 +159,7 @@ while True:
     moveServo(servo["pan"], angle["pan"])
     moveServo(servo["tilt"], angle["tilt"])
     bbox = searchTarget()
+    print(bbox)
     trackTarget(bbox)
 
 cv2.destroyAllWindows()
