@@ -67,7 +67,7 @@ def searchTarget():
     while True:
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
-        #cv2.imshow('frame', frame)
+        cv2.imshow('frame', frame)
         rec.write(frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
@@ -169,7 +169,7 @@ rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', c
 ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
-while stat:
+while stat == 1:
     tracker = cv2.TrackerKCF_create()
     target, angle["pan"], angle["tilt"] = initUrl()
     moveServo(servo["pan"], angle["pan"])
