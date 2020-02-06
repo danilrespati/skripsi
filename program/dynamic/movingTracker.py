@@ -74,7 +74,7 @@ def searchTarget():
         for(x, y, w, h) in faces:
             label, confidence = recognizer.predict(gray[y:y+h, x:x+w])
             if(subjects[label] == target):
-                #cv2.imshow('Target', frame[y:y+h, x:x+w])
+                cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
                 break
             k = cv2.waitKey(10) & 0xff
