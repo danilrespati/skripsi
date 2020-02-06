@@ -101,7 +101,7 @@ def trackTarget(bbox):
             tracked, bbox = tracker.update(frame)
             drawRectangle(frame, bbox)
             rec.write(frame)
-            #cv2.imshow('frame', frame)
+            cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
             k = cv2.waitKey(10) & 0xff
             if k == 27:
