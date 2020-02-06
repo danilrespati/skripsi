@@ -76,6 +76,10 @@ def searchTarget():
                 cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
                 break
+            k = cv2.waitKey(10) & 0xff
+            if k == 27:
+                stat = 0
+                break
         if(bbox != None):
             break
         i += 1
@@ -170,5 +174,5 @@ while stat:
         stat = 0
 
 cv2.destroyAllWindows()
-vid.release()
+rec.release()
 cam.release()
