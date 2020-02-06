@@ -154,7 +154,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/dynamic/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
-rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/movingTracker.avi', cv2.VideoWriter_fourcc(
+rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 while stat:
     print(angle, servo)
