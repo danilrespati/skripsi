@@ -117,29 +117,29 @@ def offsetCheck(bbox, ang, servo):
     "tilt":10
     }
     if (x > centerBox["xMax"]):
-        if int(angle["pan"]) <= servoRange["panMin"]:
-            int(angle["pan"]) = servoRange["panMin"]
+        if angle["pan"] <= servoRange["panMin"]:
+            angle["pan"] = servoRange["panMin"]
         else :
-            int(angle["pan"]) -= inc["pan"]
-            moveServo(servo["pan"], int(angle["pan"]))
+            angle["pan"] -= inc["pan"]
+            moveServo(servo["pan"], angle["pan"])
     if (y > centerBox["yMax"]):
-        if int(angle["tilt"]) <= servoRange["tiltMin"]:
-            int(angle["tilt"]) = servoRange["tiltMin"]
+        if angle["tilt"] <= servoRange["tiltMin"]:
+            angle["tilt"] = servoRange["tiltMin"]
         else :
-            int(angle["tilt"]) -= inc["tilt"]
-            moveServo(servo["tilt"], int(angle["tilt"]))
+            angle["tilt"] -= inc["tilt"]
+            moveServo(servo["tilt"], angle["tilt"])
     if (x < centerBox["xMin"]):
-        if int(angle["pan"]) >= servoRange["panMax"]:
-            int(angle["pan"]) = servoRange["panMax"]
+        if angle["pan"] >= servoRange["panMax"]:
+            angle["pan"] = servoRange["panMax"]
         else :
-            int(angle["pan"]) += inc["pan"]
-            moveServo(servo["pan"], int(angle["pan"]))
+            angle["pan"] += inc["pan"]
+            moveServo(servo["pan"], angle["pan"])
     if (y < centerBox["yMin"]):
-        if int(angle["tilt"]) >= servoRange["tiltMax"]:
-            int(angle["tilt"]) = servoRange["tiltMax"]
+        if angle["tilt"] >= servoRange["tiltMax"]:
+            angle["tilt"] = servoRange["tiltMax"]
         else :
-            int(angle["tilt"]) += inc["tilt"]
-            moveServo(servo["tilt"], int(angle["tilt"]))
+            angle["tilt"] += inc["tilt"]
+            moveServo(servo["tilt"], angle["tilt"])
 
 servo = {"pan":13, "tilt":11}
 angle = {"pan":90, "tilt":90}
