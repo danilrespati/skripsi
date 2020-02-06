@@ -99,7 +99,6 @@ def trackTarget(bbox):
             ret, frame = cam.read()
             frame = cv2.flip(frame, -1)
             tracked, bbox = tracker.update(frame)
-            print(bbox)
             drawRectangle(frame, bbox)
             rec.write(frame)
             cv2.imshow('frame', frame)
@@ -164,13 +163,11 @@ cam = initCam()
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 while stat:
-    print(angle, servo)
     tracker = cv2.TrackerKCF_create()
     target, angle["pan"], angle["tilt"] = initUrl()
     moveServo(servo["pan"], angle["pan"])
     moveServo(servo["tilt"], angle["tilt"])
     bbox = searchTarget()
-    print(bbox)
     trackTarget(bbox)
     k = cv2.waitKey(10) & 0xff
     if k == 27:
