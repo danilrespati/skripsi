@@ -20,8 +20,9 @@ import numpy as np
 import time
 
 def drawRectangle(frame, bbox):
-    (x, y, w, h) = bbox
-    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    p1 = (int(bbox[0]), int(bbox[1]))
+    p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+    cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
 
 def drawText(frame, text, x, y):
     cv2.putText(frame, text, (x, y), 
@@ -99,6 +100,7 @@ def trackTarget(bbox):
             frame = cv2.flip(frame, -1)
             tracked, bbox = tracker.update(frame)
             print(bbox)
+            drawRectangle(frame, bbox)
             rec.write(frame)
             cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
