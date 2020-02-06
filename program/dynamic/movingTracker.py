@@ -67,14 +67,14 @@ def searchTarget():
     while True:
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
-        cv2.imshow('frame', frame)
+        #cv2.imshow('frame', frame)
         rec.write(frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for(x, y, w, h) in faces:
             label, confidence = recognizer.predict(gray[y:y+h, x:x+w])
             if(subjects[label] == target):
-                cv2.imshow('Target', frame[y:y+h, x:x+w])
+                #cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
                 break
             k = cv2.waitKey(10) & 0xff
@@ -101,8 +101,12 @@ def trackTarget(bbox):
             tracked, bbox = tracker.update(frame)
             drawRectangle(frame, bbox)
             rec.write(frame)
-            cv2.imshow('frame', frame)
+            #cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
+            k = cv2.waitKey(10) & 0xff
+            if k == 27:
+                stat = 0
+                break
 
 def offsetCheck(bbox, ang, servo):
     global angle
@@ -162,6 +166,9 @@ subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
+ret, frame = cam.read()
+frame = cv2.flip(frame, -1)
+cv2.imshow('frame', frame)
 while stat:
     tracker = cv2.TrackerKCF_create()
     target, angle["pan"], angle["tilt"] = initUrl()
