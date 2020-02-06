@@ -17,7 +17,7 @@ def setServoAngle(servo, dutyCycle):
     pwm.stop()
 
 if __name__ == '__main__':
-    for dc in range(5, 11, 1):
+    for dc in range(5, 11, 0.5):
         print(dc)
         setServoAngle(pan, dc)
         setServoAngle(tilt, dc)
