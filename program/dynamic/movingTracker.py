@@ -66,7 +66,7 @@ def searchTarget():
     while True:
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
-        vid.write(frame)
+        rec.write(frame)
         cv2.imshow('frame', frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
@@ -92,7 +92,7 @@ def trackTarget(bbox):
             ret, frame = cam.read()
             frame = cv2.flip(frame, -1)
             tracked, bbox = tracker.update(frame)
-            vid.write(frame)
+            rec.write(frame)
             cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
 
