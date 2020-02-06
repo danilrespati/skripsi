@@ -98,6 +98,7 @@ def trackTarget(bbox):
             ret, frame = cam.read()
             frame = cv2.flip(frame, -1)
             tracked, bbox = tracker.update(frame)
+            drawRectangle(frame, bbox)
             rec.write(frame)
             cv2.imshow('frame', frame)
             offsetCheck(bbox, angle, servo)
