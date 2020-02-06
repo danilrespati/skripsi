@@ -156,7 +156,7 @@ cam = initCam()
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/movingTracker.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 while True:
-    print(angle, pos)
+    print(angle, servo)
     tracker = cv2.TrackerKCF_create()
     target, angle["pan"], angle["tilt"] = initUrl()
     moveServo(servo["pan"], angle["pan"])
