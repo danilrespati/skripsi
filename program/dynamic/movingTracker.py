@@ -55,10 +55,10 @@ def initUrl():
     target = soup.find('td', {'id': 'target'}).text
     anglePan = soup.find('td', {'id': 'x'}).text
     angleTilt = soup.find('td', {'id': 'y'}).text
-    return target, int(anglePan), int(angleTilt)
+    return target, 90, 90
 
 def moveServo(servo, angle):
-    os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    #os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
     print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
 
 def searchTarget():
