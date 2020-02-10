@@ -1,6 +1,8 @@
 from time import sleep
 import RPi.GPIO as GPIO
 import numpy as np
+from bs4 import BeautifulSoup
+import urllib.request
 
 def initUrl():
     url = 'http://192.168.100.13/skripsi/target.php'
