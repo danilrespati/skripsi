@@ -13,7 +13,7 @@ def initUrl():
     target = soup.find('td', {'id': 'target'}).text
     anglePan = soup.find('td', {'id': 'x'}).text
     angleTlt = soup.find('td', {'id': 'y'}).text
-    return stat, target, anglePan, angleTlt
+    return stat, target, int(anglePan), int(angleTlt)
 
 def setServoAngle(servo, angle):
     dutyCycle = round(((7*angle)+1350)/180, 1)
