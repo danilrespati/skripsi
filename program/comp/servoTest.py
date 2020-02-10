@@ -19,4 +19,5 @@ if __name__ == '__main__':
     for dc in np.arange(5, 11, 0.5):
         print(dc)
         setServoAngle(testPin, dc)
+    setServoAngle(testPin, 7.5)
     GPIO.cleanup()
