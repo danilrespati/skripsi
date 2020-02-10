@@ -4,10 +4,10 @@ import urllib.request
 
 class url:
     def __init__(self, url):
-        web = urllib.request.urlopen(url)
+        self.web = urllib.request.urlopen(url)
 
     def parse():
-        html = web.read()
+        html = self.web.read()
         soup = BeautifulSoup(html, 'lxml')
         stat = soup.find('em').text
         target = soup.find('td', {'id': 'target'}).text
