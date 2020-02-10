@@ -16,14 +16,18 @@ def initUrl():
     return stat, target, int(anglePan), int(angleTlt)
 
 def setServoAngle(servo, angle):
-    if (angle >= -80 and dutyCycle <= 80):
-        dutyCycle = round(((7*angle)+1350)/180, 1)
-        pwm = GPIO.PWM(servo, 50)
-        pwm.start(0)
-        pwm.ChangeDutyCycle(dutyCycle)
-        print("{0} -> {1}".format(angle, dutyCycle))
-        sleep(0.5)
-        pwm.stop()
+    servoRange = (-80, 80)
+    if (angle <= servoRange[0]):
+        angle = servoRange[0]
+    if (angle >= servoRange[1]):
+        angle = servoRange[1]
+    dutyCycle = round(((7*angle)+1350)/180, 1)
+    pwm = GPIO.PWM(servo, 50)
+    pwm.start(0)
+    pwm.ChangeDutyCycle(dutyCycle)
+    print("{0} -> {1}".format(angle, dutyCycle))
+    sleep(0.5)
+    pwm.stop()
 
 testPin = 11
 GPIO.setmode(GPIO.BOARD)
