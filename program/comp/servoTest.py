@@ -14,7 +14,7 @@ def setServoAngle(servo, angle):
         pwm.start(0)
         pwm.ChangeDutyCycle(dutyCycle)
         print("{0} -> {1}".format(angle, dutyCycle))
-        sleep(0.5)\
+        sleep(0.5)
         pwm.stop()
 
 if __name__ == '__main__':
