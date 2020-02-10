@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 import urllib.request
 
 class url:
-    def __init__(self, url):
-        self.web = urllib.request.urlopen(url)
+    def __init__(url):
+        web = urllib.request.urlopen(url)
 
     def parse():
-        html = self.web.read()
+        html = web.read()
         soup = BeautifulSoup(html, 'lxml')
         stat = soup.find('em').text
         target = soup.find('td', {'id': 'target'}).text
