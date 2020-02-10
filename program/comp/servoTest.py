@@ -34,6 +34,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(testPin, GPIO.OUT)
 stat, target, anglePan, angleTlt = initUrl()
+print(stat, target, anglePan, angleTlt)
 if stat=="Running":
     setServoAngle(testPin, anglePan)
     setServoAngle(testPin, 0)
