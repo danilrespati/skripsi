@@ -26,7 +26,7 @@ def setServoAngle(servo, angle):
     pwm.start(0)
     pwm.ChangeDutyCycle(dutyCycle)
     print("{0} -> {1}".format(angle, dutyCycle))
-    sleep(0.5)
+    sleep(1)
     pwm.stop()
 
 testPin = 11
@@ -35,7 +35,7 @@ GPIO.setwarnings(False)
 GPIO.setup(testPin, GPIO.OUT)
 stat, target, anglePan, angleTlt = initUrl()
 print(stat, target, anglePan, angleTlt)
-if stat=="Running":
+while (stat=="Running"):
     setServoAngle(testPin, anglePan)
     setServoAngle(testPin, 0)
     GPIO.cleanup()
