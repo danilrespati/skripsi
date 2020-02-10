@@ -14,6 +14,7 @@ def initUrl():
 url = 'http://192.168.100.13/skripsi/target.php'
 web = urllib.request.urlopen(url)
 stat, target, anglePan, angleTlt = initUrl()
+print(stat, target, anglePan, angleTlt)
 while (stat == "Running"):
     stat, target, anglePan, angleTlt = initUrl()
     print(target, anglePan, angleTlt)
