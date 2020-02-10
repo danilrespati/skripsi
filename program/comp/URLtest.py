@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 
 class url:
-    def __init__(url):
+    def __init__(self, url):
         web = urllib.request.urlopen(url)
 
     def parse():
