@@ -6,11 +6,12 @@ def initUrl():
     web = urllib.request.urlopen(url)
     html = web.read()
     soup = BeautifulSoup(html, 'lxml')
-    stat = soup.find('em')
+    stat = soup.find('em').text
     target = soup.find('td', {'id': 'target'}).text
     anglePan = soup.find('td', {'id': 'x'}).text
     angleTlt = soup.find('td', {'id': 'y'}).text
     return stat, target, anglePan, angleTlt
 
 stat, target, anglePan, angleTlt = initUrl()
-print(stat, target, anglePan, angleTlt)
+while (stat == "Running"):
+    print(target, anglePan, angleTlt)
