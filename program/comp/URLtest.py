@@ -6,7 +6,7 @@ class url:
     def __init__(self, url):
         self.web = urllib.request.urlopen(url)
 
-    def parse(self):
+    def parse():
         html = self.web.read()
         soup = BeautifulSoup(html, 'lxml')
         stat = soup.find('em').text
