@@ -7,7 +7,7 @@ class url:
         self.web = urllib.request.urlopen(url)
 
     def parse(self):
-        html = web.read()
+        html = self.web.read()
         soup = BeautifulSoup(html, 'lxml')
         stat = soup.find('em').text
         target = soup.find('td', {'id': 'target'}).text
