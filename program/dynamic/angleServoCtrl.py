@@ -6,8 +6,9 @@ GPIO.setwarnings(False)
 def setServoAngle(servoPin, angle):
 	pwm = GPIO.PWM(servoPin, 50)
 	pwm.start(8)
-	dutyCycle = ((7*angle)+1350)/180
+	#dutyCycle = ((7*angle)+1350)/180
 	#dutyCycle = angle / 18. + 3.
+	dutyCycle = angle / 10
 	pwm.ChangeDutyCycle(dutyCycle)
 	sleep(0.3)
 	pwm.stop()
