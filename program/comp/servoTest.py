@@ -35,7 +35,7 @@ GPIO.setwarnings(False)
 GPIO.setup(testPin, GPIO.OUT)
 stat, target, anglePan, angleTlt = initUrl()
 print(stat, target, anglePan, angleTlt)
-while (stat=="Running"):
+if (stat=="Running"):
     setServoAngle(testPin, anglePan)
     setServoAngle(testPin, 0)
     GPIO.cleanup()
