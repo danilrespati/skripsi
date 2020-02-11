@@ -14,6 +14,8 @@ def setServoAngle(servo, angle):
 		pwm.ChangeDutyCycle(dutyCycle)
 		sleep(0.3)
 		pwm.stop()
+	else:
+		print("Limit: -90 <= angle <= 90")
 
 if __name__ == '__main__':
 	import sys
