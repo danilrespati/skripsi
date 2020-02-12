@@ -159,6 +159,7 @@ cv2.imshow('frame', frame)
 while stat == 1:
     tracker = cv2.TrackerKCF_create()
     stat, target, angle["pan"], angle["tlt"] = initUrl()
+    print(angle)
     moveServo(servo["pan"], angle["pan"])
     moveServo(servo["tlt"], angle["tlt"])
     bbox = searchTarget()
