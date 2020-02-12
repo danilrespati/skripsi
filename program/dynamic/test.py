@@ -1,5 +1,5 @@
 import subprocess
+import os
 servo = str(13)
 angle = str(50)
-subprocess.run(['angleServoCtrl.py', servo, angle])
-# /home/pi/skripsi/program/dynamic/
+subprocess.run(['/home/pi/skripsi/program/dynamic/angleServoCtrl.py', servo, angle])
