@@ -1,1 +1,1 @@
-execfile('file.py 13 50')
+subprocess.call(['angleServoCtrl.py', 13, 50])
