@@ -1,5 +1,10 @@
-import subprocess
+import cv2
 import os
-servo = str(13)
-angle = str(50)
-subprocess.call(['./angleServoCtrl.py', servo, angle])
+import numpy as np
+import time
+
+def moveServo(servo, angle):
+    #os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
+
+moveServo(13, 50)
