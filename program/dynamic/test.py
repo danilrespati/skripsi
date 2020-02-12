@@ -1,2 +1,4 @@
 import subprocess
-subprocess.call(['angleServoCtrl.py', 13, 50])
+servo = str(13)
+angle = str(50)
+subprocess.call(['angleServoCtrl.py', servo, angle])
