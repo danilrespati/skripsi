@@ -47,9 +47,17 @@ def detectFace(frame):
 	faces = faceCascade.detectMultiScale(gray, 1.3, 3, 0)
 	return faces
 
+# faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+# 		'/data/classifier/lbpcascades'
+# 		'/lbpcascade_frontalface.xml')
+
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
 		'/data/classifier/lbpcascades'
-		'/lbpcascade_frontalface.xml')
+		'/lbpcascade_frontalface_improved.xml')
+
+# faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+# 		'/data/classifier/haarcascades'
+# 		'/haarcascade_frontalface_default.xml')
 
 cam = initCam()
 stat = 1
