@@ -51,13 +51,13 @@ def detectFace(frame):
 # 		'/data/classifier/lbpcascades'
 # 		'/lbpcascade_frontalface.xml')
 
-faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
-		'/data/classifier/lbpcascades'
-		'/lbpcascade_frontalface_improved.xml')
-
 # faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
-# 		'/data/classifier/haarcascades'
-# 		'/haarcascade_frontalface_default.xml')
+# 		'/data/classifier/lbpcascades'
+# 		'/lbpcascade_frontalface_improved.xml')
+
+faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+		'/data/classifier/haarcascades'
+		'/haarcascade_frontalface_default.xml')
 
 cam = initCam()
 stat = 1
@@ -68,7 +68,7 @@ while stat:
 	faces = detectFace(frame)
 	for (x,y,w,h) in faces:
 		drawRectangle(frame, bbox=(x,y,w,h))
-		#drawText(frame, "Position: {0}, {1}".format(x,y), 10, 10)
+		drawText(frame, "Position: {0}, {1}".format(x,y), 10, 10)
 		x = x+(w/2)
 		y = y+(h/2)
 	cv2.imshow('Preview',frame)
