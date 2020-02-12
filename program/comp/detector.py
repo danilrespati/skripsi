@@ -20,6 +20,15 @@ GPIO.setwarnings(False)
 tiltServo = 11
 panServo = 13
 
+def drawRectangle(frame, bbox):
+    p1 = (int(bbox[0]), int(bbox[1]))
+    p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+    cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
+
+def drawText(frame, text, x, y):
+    cv2.putText(frame, text, (x, y), 
+                cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
+
 def initCam():
 	frameWidth = 640
 	frameHeight = 480
@@ -50,7 +59,8 @@ while stat:
 	frame = cv2.flip(frame, -1)
 	faces = detectFace(frame)
 	for (x,y,w,h) in faces:
-		cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+		drawRectangle(frame, bbox=(x,y,w,h))
+		#drawText(frame, "Position: {0}, {1}".format(x,y), 10, 10)
 		x = x+(w/2)
 		y = y+(h/2)
 	cv2.imshow('Preview',frame)
