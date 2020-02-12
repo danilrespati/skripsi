@@ -42,7 +42,7 @@ def initUrl():
     target = soup.find('td', {'id': 'target'}).text
     pan = soup.find('td', {'id': 'pan'}).text
     tlt = soup.find('td', {'id': 'tlt'}).text
-    return 1, target, pan, tlt
+    return 1, target, int(pan), int(tlt)
 
 def moveServo(servo, angle):
     os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
