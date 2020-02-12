@@ -40,8 +40,8 @@ def initUrl():
     soup = BeautifulSoup(html, 'lxml')
     stat = soup.find('em').text
     target = soup.find('td', {'id': 'target'}).text
-    pan = soup.find('td', {'id': 'x'}).text
-    tlt = soup.find('td', {'id': 'y'}).text
+    pan = soup.find('td', {'id': 'pan'}).text
+    tlt = soup.find('td', {'id': 'tlt'}).text
     return 1, target, pan, tlt
 
 def moveServo(servo, angle):
