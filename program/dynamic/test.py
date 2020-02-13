@@ -113,8 +113,8 @@ def offsetCheck(bbox):
         "tltMax":30
         }
     inc = {
-        "pan":1,
-        "tlt":1
+        "pan":2,
+        "tlt":2
         }
     if (x > centerBox["xMax"]):
         if angle["pan"] <= servoRange["panMin"]:
