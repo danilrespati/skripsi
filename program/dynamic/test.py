@@ -119,7 +119,7 @@ def offsetCheck(bbox):
         if angle["pan"] <= servoRange["panMin"]:
             angle["pan"] = servoRange["panMin"]
         else :
-            angle["pan"] -= inc["pan"]
+            angle["pan"] += inc["pan"]
             moveServo(servo["pan"], angle["pan"])
     if (y > centerBox["yMax"]):
         if angle["tlt"] <= servoRange["tltMin"]:
@@ -131,7 +131,7 @@ def offsetCheck(bbox):
         if angle["pan"] >= servoRange["panMax"]:
             angle["pan"] = servoRange["panMax"]
         else :
-            angle["pan"] += inc["pan"]
+            angle["pan"] -= inc["pan"]
             moveServo(servo["pan"], angle["pan"])
     if (y < centerBox["yMin"]):
         if angle["tlt"] >= servoRange["tltMax"]:
