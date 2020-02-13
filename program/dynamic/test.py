@@ -90,6 +90,7 @@ def trackTarget(bbox):
             rec.write(frame)
             cv2.imshow('frame', frame)
             offsetCheck(bbox)
+            tracked, bbox = tracker.update(frame)
             k = cv2.waitKey(10) & 0xff
             if k == 27:
                 stat = 0
