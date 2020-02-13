@@ -142,7 +142,9 @@ def offsetCheck(bbox):
 
 stat = 1
 servo = {"pan":13, "tlt":11}
-angle = {"pan":90, "tlt":90}
+angle = {"pan":0, "tlt":0}
+moveServo(servo["pan"], angle["pan"])
+moveServo(servo["tlt"], angle["tlt"])
 
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/data/classifier/lbpcascades'
@@ -169,6 +171,8 @@ while stat == 1:
         stat = 0
         break
 
+moveServo(servo["pan"], 0)
+moveServo(servo["tlt"], 0)
 cv2.destroyAllWindows()
 rec.release()
 cam.release()
