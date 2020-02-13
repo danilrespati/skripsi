@@ -42,7 +42,7 @@ def initUrl():
     target = soup.find('td', {'id': 'target'}).text
     pan = soup.find('td', {'id': 'pan'}).text
     tlt = soup.find('td', {'id': 'tlt'}).text
-    return 1, target, int(pan), int(tlt)
+    return stat, target, int(pan), int(tlt)
 
 def moveServo(servo, angle):
     os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
@@ -141,7 +141,6 @@ def offsetCheck(bbox):
             angle["tlt"] += inc["tlt"]
             moveServo(servo["tlt"], angle["tlt"])
 
-stat = 1
 servo = {"pan":13, "tlt":11}
 angle = {"pan":0, "tlt":0}
 moveServo(servo["pan"], angle["pan"])
@@ -159,12 +158,12 @@ rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', c
 ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
-while stat == 1:
+stat, target, angle["pan"], angle["tlt"] = initUrl()
+print(angle)
+moveServo(servo["pan"], angle["pan"])
+moveServo(servo["tlt"], angle["tlt"])
+while stat == "Running":
     tracker = cv2.TrackerKCF_create()
-    #stat, target, angle["pan"], angle["tlt"] = initUrl()
-    #print(angle)
-    moveServo(servo["pan"], angle["pan"])
-    moveServo(servo["tlt"], angle["tlt"])
     bbox = searchTarget()
     trackTarget(bbox)
     k = cv2.waitKey(10) & 0xff
