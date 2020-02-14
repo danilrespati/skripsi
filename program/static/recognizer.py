@@ -89,6 +89,8 @@ def posToAngle(pos):
     return pan, tilt
 
 stat = 1
+target = input('Target: ')
+print('(ESC) Exit\n(c) Change target')
 pos = {"x":0, "y":0}
 angle = {"pan":0, "tilt":0}
 
@@ -98,14 +100,12 @@ faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Yoga', 'kosong', 'kosong']
+
 cam = initCam()
 if os.path.exists("/home/pi/skripsi/data/video/static/video.avi"):
     os.remove("/home/pi/skripsi/data/video/static/video.avi")
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/video.avi', cv2.VideoWriter_fourcc(
     'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
-target = input('Target: ')
-print('(ESC) Exit\n(c) Change target')
-sendAngle(stat, target, pos, angle)
 
 while stat:
     pos["x"], pos["y"] = searchTarget()
