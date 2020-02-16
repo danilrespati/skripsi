@@ -69,10 +69,26 @@ def sendAngle(stat, target, pos, angle):
     f.write(message)
     f.close()
 
+def posToDist(pos):
+    ppm = 100 #Calibrate from calPos.py static
+    ppc = ppm/100
+    centerX = frameSize[0]//2
+    centerY = frameSize[1]//2
+    deltaX = centerX - pos["x"]
+    deltaY = centerY - pos["y"]
+    dist = [deltaX//ppc, deltaY//ppc]
+    return dist
+
+def distToAngle(dist):
+    camDist = 200 #Calibrate from calPos.py dynamic
+    pan = math.degrees(math.atan(dist[0]/camDist))
+    tlt = math.degrees(math.atan(dist[1]/camDist))
+    return pan, tlt
+
 def posToAngle(pos):
-    pan = pos["x"]
-    tilt = pos["y"]
-    return pan, tilt
+    dist = posToDist(pos)
+    angle = distToAngle(dist)
+    return angle[0], angle[1]
 
 stat = 1
 target = input('Target: ')
