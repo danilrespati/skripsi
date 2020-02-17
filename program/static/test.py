@@ -83,7 +83,7 @@ def distToAngle(dist):
     camDist = 200 #Calibrate from calPos.py dynamic
     pan = math.degrees(math.atan(dist[0]/camDist))
     tlt = math.degrees(math.atan(dist[1]/camDist))
-    return pan, tlt
+    return round(pan,1), round(tlt,1)
 
 def posToAngle(pos):
     dist = posToDist(pos)
