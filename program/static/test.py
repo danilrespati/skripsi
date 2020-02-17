@@ -74,8 +74,8 @@ def posToDist(pos):
     ppc = ppm/100
     centerX = frameSize[0]//2
     centerY = frameSize[1]//2
-    deltaX = centerX - pos["x"]
-    deltaY = centerY - pos["y"]
+    deltaX = (centerX - pos["x"])*(-1)
+    deltaY = (centerY - pos["y"])*(1)
     dist = [deltaX//ppc, deltaY//ppc]
     return dist
 
