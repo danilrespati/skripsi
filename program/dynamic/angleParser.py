@@ -45,8 +45,6 @@ ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
 stat, target, angle["pan"], angle["tlt"] = initUrl()
-moveServo(servo["pan"], angle["pan"])
-moveServo(servo["tlt"], angle["tlt"])
 print(stat)
 while stat == "Running":
     ret, frame = cam.read()
@@ -54,7 +52,6 @@ while stat == "Running":
     cv2.imshow('frame', frame)
     rec.write(frame)
     stat, target, angle["pan"], angle["tlt"] = initUrl()
-    print(angle, currAngle)
     if (abs(currAngle["pan"]-angle["pan"]) >= 1):
         moveServo(servo["pan"], angle["pan"])
         currAngle["pan"] = angle["pan"]
