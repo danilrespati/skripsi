@@ -52,6 +52,7 @@ while stat == "Running":
     ret, frame = cam.read()
     frame = cv2.flip(frame, -1)
     cv2.imshow('frame', frame)
+    rec.write(frame)
     stat, target, angle["pan"], angle["tlt"] = initUrl()
     print(angle, currAngle)
     if (abs(currAngle["pan"]-angle["pan"]) >= 1):
