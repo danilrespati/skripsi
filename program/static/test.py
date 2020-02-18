@@ -94,7 +94,7 @@ stat = 1
 target = input('Target: ')
 pos = {"x":0, "y":0}
 angle = {"pan":0, "tlt":0}
-
+sendAngle(stat, target, pos, angle)
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/data/classifier/lbpcascades'
                                     '/lbpcascade_frontalface.xml')
