@@ -55,7 +55,6 @@ while stat == "Running":
     if (abs(currAngle["pan"]-angle["pan"]) >= 1):
         moveServo(servo["pan"], angle["pan"])
         currAngle["pan"] = angle["pan"]
-        print("mashook")
     if (abs(currAngle["tlt"]-angle["tlt"]) >= 1):
         moveServo(servo["tlt"], angle["tlt"])
         currAngle["tlt"] = angle["tlt"]
