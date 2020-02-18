@@ -32,6 +32,7 @@ def moveServo(servo, angle):
 
 servo = {"pan":13, "tlt":11}
 angle = {"pan":0, "tlt":0}
+currAngle = angle
 moveServo(servo["pan"], angle["pan"])
 moveServo(servo["tlt"], angle["tlt"])
 
@@ -44,7 +45,6 @@ ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
 stat, target, angle["pan"], angle["tlt"] = initUrl()
-currAngle = angle
 moveServo(servo["pan"], angle["pan"])
 moveServo(servo["tlt"], angle["tlt"])
 print(stat)
@@ -56,9 +56,10 @@ while stat == "Running":
     print(angle)
     if (abs(currAngle["pan"]-angle["pan"]) >= 1):
         moveServo(servo["pan"], angle["pan"])
+        currAngle["pan"] = angle["pan"]
     if (abs(currAngle["tlt"]-angle["tlt"]) >= 1):
         moveServo(servo["tlt"], angle["tlt"])
-    currAngle = angle
+        currAngle["tlt"] = angle["tlt"]
     k = cv2.waitKey(10) & 0xff
     if k == 27:
         stat = 0
