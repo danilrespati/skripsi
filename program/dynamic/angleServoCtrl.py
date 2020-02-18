@@ -19,7 +19,7 @@ def setServoAngle(servo, angle):
 
 if __name__ == '__main__':
 	import sys
-	servo = float(sys.argv[1])
+	servo = int(sys.argv[1])
 	angle = float(sys.argv[2])
 	GPIO.setup(servo, GPIO.OUT)
 	setServoAngle(servo, angle)
