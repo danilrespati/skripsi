@@ -52,10 +52,10 @@ while stat == "Running":
     cv2.imshow('frame', frame)
     rec.write(frame)
     stat, target, angle["pan"], angle["tlt"] = initUrl()
-    if (abs(currAngle["pan"]-angle["pan"]) >= 1):
+    if (abs(currAngle["pan"]-angle["pan"]) >= 0.3):
         moveServo(servo["pan"], angle["pan"])
         currAngle["pan"] = angle["pan"]
-    if (abs(currAngle["tlt"]-angle["tlt"]) >= 1):
+    if (abs(currAngle["tlt"]-angle["tlt"]) >= 0.3):
         moveServo(servo["tlt"], angle["tlt"])
         currAngle["tlt"] = angle["tlt"]
     k = cv2.waitKey(10) & 0xff
