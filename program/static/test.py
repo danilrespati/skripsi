@@ -77,6 +77,7 @@ def posToDist(pos):
     deltaX = (centerX - pos["x"])*(-1)
     deltaY = (centerY - pos["y"])*(1)
     dist = [deltaX//ppc, deltaY//ppc]
+    dist[1] = dist[1] + 30 #camStatic and camDynamic diff height
     return dist
 
 def distToAngle(dist):
