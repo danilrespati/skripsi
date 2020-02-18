@@ -24,7 +24,7 @@ def initUrl():
     target = soup.find('td', {'id': 'target'}).text
     pan = soup.find('td', {'id': 'pan'}).text
     tlt = soup.find('td', {'id': 'tlt'}).text
-    return stat, target, pan, tlt
+    return stat, target, float(pan), float(tlt)
 
 def moveServo(servo, angle):
     os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
@@ -47,6 +47,7 @@ stat, target, angle["pan"], angle["tlt"] = initUrl()
 currAngle = angle
 moveServo(servo["pan"], angle["pan"])
 moveServo(servo["tlt"], angle["tlt"])
+print(stat)
 while stat == "Running":
     ret, frame = cam.read()
     frame = cv2.flip(frame, -1)
