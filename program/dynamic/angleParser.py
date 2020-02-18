@@ -32,7 +32,7 @@ def moveServo(servo, angle):
 
 servo = {"pan":13, "tlt":11}
 angle = {"pan":0, "tlt":0}
-currAngle = angle
+currAngle = {"pan":0, "tlt":0}
 moveServo(servo["pan"], angle["pan"])
 moveServo(servo["tlt"], angle["tlt"])
 
