@@ -11,6 +11,13 @@ def drawText(frame, text, x, y):
     cv2.putText(frame, text, (x, y), 
                 cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
 
+def timer(*con): #Need to import time first
+    global startTime
+    if(con[0] == "start"):
+        startTime = time.time()
+    if(con[0] =="stop"):
+        print("--- {0} executed in {1} seconds ---\n".format(con[1], (time.time() - startTime)))
+
 def initCam():
     global frameSize
     frameSize = [1280, 720]
