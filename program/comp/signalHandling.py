@@ -3,7 +3,7 @@ import time
 import signal
 import sys
 
-def signal_handler(sig, frame):
+def signalHandler(sig, frame):
     # print a status message
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
@@ -11,7 +11,7 @@ def signal_handler(sig, frame):
     sys.exit()
     
 def infiniteLoop():
-    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGINT, signalHandler)
     while True:
         print("loop")
         time.sleep(0.1)
