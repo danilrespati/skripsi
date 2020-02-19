@@ -14,7 +14,7 @@ def infiniteLoop():
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         print("loop")
-        time.sleep(3)
+        time.sleep(0.1)
     
 if __name__ == "__main__":
     infiniteLoop()
