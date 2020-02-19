@@ -11,6 +11,10 @@ def terminateProcess(signalNumber, frame):
     print ('(SIGTERM) terminating the process')
     sys.exit()
 
+def quitProcess(signalNumber, frame):
+    print ('(SIGQUIT) terminating the process')
+    sys.exit()
+
 def receiveSignal(signalNumber, frame):
     print('Received:', signalNumber)
     return
@@ -19,7 +23,7 @@ if __name__ == '__main__':
     # register the signals to be caught
     signal.signal(signal.SIGHUP, readConfiguration)
     signal.signal(signal.SIGINT, receiveSignal)
-    signal.signal(signal.SIGQUIT, receiveSignal)
+    signal.signal(signal.SIGQUIT, quitProcess)
     signal.signal(signal.SIGILL, receiveSignal)
     signal.signal(signal.SIGTRAP, receiveSignal)
     signal.signal(signal.SIGABRT, receiveSignal)
