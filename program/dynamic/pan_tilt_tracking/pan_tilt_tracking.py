@@ -19,10 +19,6 @@ def signal_handler(sig, frame):
 	# print a status message
 	print("[INFO] You pressed `ctrl + c`! Exiting...")
 
-	# disable the servos
-	pth.servo_enable(1, False)
-	pth.servo_enable(2, False)
-
 	# exit
 	sys.exit()
 
@@ -84,6 +80,10 @@ def in_range(val, start, end):
 	# determine the input vale is in the supplied range
 	return (val >= start and val <= end)
 
+def moveServo(servo, angle):
+    os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
+
 def set_servos(pan, tlt):
 	# signal trap to handle keyboard interrupt
 	signal.signal(signal.SIGINT, signal_handler)
@@ -96,11 +96,11 @@ def set_servos(pan, tlt):
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
-			pth.pan(panAngle)
+			moveServo(13 ,panAngle)
 
 		# if the tilt angle is within the range, tilt
 		if in_range(tltAngle, servoRange[0], servoRange[1]):
-			pth.tilt(tltAngle)
+			moveServo(11 ,tltAngle)
 
 # check to see if this is the main body of execution
 if __name__ == "__main__":
@@ -112,10 +112,6 @@ if __name__ == "__main__":
 
 	# start a manager for managing process-safe variables
 	with Manager() as manager:
-		# enable the servos
-		pth.servo_enable(1, True)
-		pth.servo_enable(2, True)
-
 		# set integer values for the object center (x, y)-coordinates
 		centerX = manager.Value("i", 0)
 		centerY = manager.Value("i", 0)
@@ -163,10 +159,6 @@ if __name__ == "__main__":
 		processPanning.join()
 		processTilting.join()
 		processSetServos.join()
-
-		# disable the servos
-		pth.servo_enable(1, False)
-		pth.servo_enable(2, False)
 
 # USAGE
 # python pan_tilt_tracking.py --cascade haarcascade_frontalface_default.xml
