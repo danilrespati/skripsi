@@ -9,6 +9,7 @@ import signal
 import time
 import sys
 import cv2
+import os
 
 # define the range for the motors
 servoRange = (-90, 90)
