@@ -4,7 +4,6 @@ from multiprocessing import Process
 from imutils.video import VideoStream
 from pyimagesearch.objcenter import ObjCenter
 from pyimagesearch.pid import PID
-import pantilthat as pth
 import argparse
 import signal
 import time
