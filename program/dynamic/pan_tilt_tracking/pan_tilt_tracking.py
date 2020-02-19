@@ -96,11 +96,11 @@ def set_servos(pan, tlt):
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
-			moveServo(13 ,panAngle)
+			moveServo(13 ,round(panAngle,2))
 
 		# if the tilt angle is within the range, tilt
 		if in_range(tltAngle, servoRange[0], servoRange[1]):
-			moveServo(11 ,tltAngle)
+			moveServo(11 ,round(tltAngle,2))
 
 # check to see if this is the main body of execution
 if __name__ == "__main__":
