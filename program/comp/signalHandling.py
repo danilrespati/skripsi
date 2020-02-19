@@ -22,8 +22,8 @@ def receiveSignal(signalNumber, frame):
 if __name__ == '__main__':
     # register the signals to be caught
     signal.signal(signal.SIGHUP, readConfiguration)
-    signal.signal(signal.SIGINT, receiveSignal)
-    signal.signal(signal.SIGQUIT, quitProcess)
+    signal.signal(signal.SIGINT, receiveSignal) #Ctrl+C
+    signal.signal(signal.SIGQUIT, quitProcess) #Crtl+\
     signal.signal(signal.SIGILL, receiveSignal)
     signal.signal(signal.SIGTRAP, receiveSignal)
     signal.signal(signal.SIGABRT, receiveSignal)
