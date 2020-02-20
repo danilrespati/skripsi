@@ -148,7 +148,7 @@ moveServo(servo["tlt"], angle["tlt"])
 
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/data/classifier/lbpcascades'
-                                    '/lbpcascade_frontalface.xml')
+                                    '/lbpcascade_frontalface_improved.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/dynamic/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
