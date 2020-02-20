@@ -96,6 +96,7 @@ def set_servos(pan, tlt):
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
+			
 			moveServo(13 ,round(panAngle,2))
 
 		# if the tilt angle is within the range, tilt
