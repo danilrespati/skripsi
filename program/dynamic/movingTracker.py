@@ -22,14 +22,12 @@ def timer(*con):
         print("--- {0} executed in {1} seconds ---\n".format(con[1], (time.time() - startTime)))
 
 def initCam():
-    global frameWidth
-    global frameHeight
-    frameWidth = 640
-    frameHeight = 480
+    global frameSize
+    frameSize = [640, 480]
     brightness = 0.6
     cap = cv2.VideoCapture(0)
-    cap.set(3, frameWidth)
-    cap.set(4, frameHeight)
+    cap.set(3, frameSize[0])
+    cap.set(4, frameSize[1])
     cap.set(10, brightness)
     return cap
 
@@ -113,8 +111,8 @@ def offsetCheck(bbox):
         "tltMax":30
         }
     inc = {
-        "pan":3,
-        "tlt":2
+        "pan":1,
+        "tlt":1
         }
     if (x > centerBox["xMax"]):
         if angle["pan"] <= servoRange["panMin"]:
@@ -154,7 +152,7 @@ recognizer.read('/home/pi/skripsi/data/trainer/dynamic/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
 cam = initCam()
 rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', cv2.VideoWriter_fourcc(
-    'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
+    'M', 'J', 'P', 'G'), 10, (frameSize[0], frameSize[1]))
 ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
