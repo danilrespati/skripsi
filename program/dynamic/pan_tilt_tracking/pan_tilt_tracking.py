@@ -91,7 +91,7 @@ def set_servos(pan, tlt):
 	# loop indefinitely
 	while True:
 		# the pan and tilt angles are reversed
-		panAngle = -1 * pan.value
+		panAngle = 1 * pan.value
 		tltAngle = -1 * tlt.value
 
 		# if the pan angle is within the range, pan
