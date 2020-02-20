@@ -88,6 +88,9 @@ def set_servos(pan, tlt):
 	# signal trap to handle keyboard interrupt
 	signal.signal(signal.SIGINT, signal_handler)
 
+	panLast = 0
+	tltLast = 0
+
 	# loop indefinitely
 	while True:
 		# the pan and tilt angles are reversed
@@ -96,12 +99,15 @@ def set_servos(pan, tlt):
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
-			
-			moveServo(13 ,round(panAngle,2))
+			if (abs(panAngle - panLast) >= 0.2):
+				moveServo(13 ,round(panAngle,2))
+				panLast = panAngle
 
 		# if the tilt angle is within the range, tilt
 		if in_range(tltAngle, servoRange[0], servoRange[1]):
-			moveServo(11 ,round(tltAngle,2))
+			if (abs(tltAngle - tltLast) >= 0.2):
+				moveServo(11 ,round(tltAngle,2))
+				tltLast = tltAngle
 
 # check to see if this is the main body of execution
 if __name__ == "__main__":
