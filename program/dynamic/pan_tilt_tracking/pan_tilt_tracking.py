@@ -92,7 +92,7 @@ def set_servos(pan, tlt):
 	while True:
 		# the pan and tilt angles are reversed
 		panAngle = 1 * pan.value
-		tltAngle = -1 * tlt.value
+		tltAngle = 1 * tlt.value
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
@@ -125,12 +125,12 @@ if __name__ == "__main__":
 		tlt = manager.Value("i", 0)
 
 		# set PID values for panning
-		panP = manager.Value("f", 1)
+		panP = manager.Value("f", 0.5)
 		panI = manager.Value("f", 0.0)
 		panD = manager.Value("f", 0.0)
 
 		# set PID values for tilting
-		tiltP = manager.Value("f", 1)
+		tiltP = manager.Value("f", 0.5)
 		tiltI = manager.Value("f", 0.0)
 		tiltD = manager.Value("f", 0.0)
 
