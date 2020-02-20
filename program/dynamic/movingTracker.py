@@ -1,17 +1,3 @@
-"""
-Program flow:
-START
-Move servo(initial position)
-Face detection
-Face recognition
-Setup tracker
-Check offset
-Move servo(offset based)
-If tracker lost: move to line 4
-If ESC pressed: break
-STOP
-"""
-
 from bs4 import BeautifulSoup
 import urllib.request
 import cv2
@@ -52,13 +38,14 @@ def initUrl():
     web = urllib.request.urlopen(url)
     html = web.read()
     soup = BeautifulSoup(html, 'lxml')
+    stat = soup.find('em').text
     target = soup.find('td', {'id': 'target'}).text
-    anglePan = soup.find('td', {'id': 'x'}).text
-    angleTilt = soup.find('td', {'id': 'y'}).text
-    return target, 90, 90
+    pan = soup.find('td', {'id': 'pan'}).text
+    tlt = soup.find('td', {'id': 'tlt'}).text
+    return stat, target, float(pan), float(tlt)
 
 def moveServo(servo, angle):
-    #os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
     print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
 
 def searchTarget():
@@ -102,64 +89,66 @@ def trackTarget(bbox):
             drawRectangle(frame, bbox)
             rec.write(frame)
             cv2.imshow('frame', frame)
-            offsetCheck(bbox, angle, servo)
+            offsetCheck(bbox)
+            tracked, bbox = tracker.update(frame)
             k = cv2.waitKey(10) & 0xff
             if k == 27:
                 stat = 0
                 break
 
-def offsetCheck(bbox, ang, servo):
+def offsetCheck(bbox):
     global angle
     x = int(bbox[0] + (bbox[2] / 2))
     y = int(bbox[1] + (bbox[3] / 2))
     centerBox = {
-        "xMax":250,
-        "yMax":150,
-        "xMin":150,
-        "yMin":100
+        "xMin":290,
+        "xMax":350,
+        "yMin":150,
+        "yMax":300
         }
     servoRange = {
-        "panMax":150,
-        "tiltMax":140,
-        "panMin":30,
-        "tiltMin":40
+        "panMin":-90,
+        "panMax":90,
+        "tltMin":-30,
+        "tltMax":30
         }
     inc = {
-        "pan":5,
-        "tilt":10
+        "pan":3,
+        "tlt":2
         }
     if (x > centerBox["xMax"]):
         if angle["pan"] <= servoRange["panMin"]:
             angle["pan"] = servoRange["panMin"]
         else :
-            angle["pan"] -= inc["pan"]
+            angle["pan"] += inc["pan"]
             moveServo(servo["pan"], angle["pan"])
     if (y > centerBox["yMax"]):
-        if angle["tilt"] <= servoRange["tiltMin"]:
-            angle["tilt"] = servoRange["tiltMin"]
+        if angle["tlt"] <= servoRange["tltMin"]:
+            angle["tlt"] = servoRange["tltMin"]
         else :
-            angle["tilt"] -= inc["tilt"]
-            moveServo(servo["tilt"], angle["tilt"])
+            angle["tlt"] -= inc["tlt"]
+            moveServo(servo["tlt"], angle["tlt"])
     if (x < centerBox["xMin"]):
         if angle["pan"] >= servoRange["panMax"]:
             angle["pan"] = servoRange["panMax"]
         else :
-            angle["pan"] += inc["pan"]
+            angle["pan"] -= inc["pan"]
             moveServo(servo["pan"], angle["pan"])
     if (y < centerBox["yMin"]):
-        if angle["tilt"] >= servoRange["tiltMax"]:
-            angle["tilt"] = servoRange["tiltMax"]
+        if angle["tlt"] >= servoRange["tltMax"]:
+            angle["tlt"] = servoRange["tltMax"]
         else :
-            angle["tilt"] += inc["tilt"]
-            moveServo(servo["tilt"], angle["tilt"])
+            angle["tlt"] += inc["tlt"]
+            moveServo(servo["tlt"], angle["tlt"])
 
-stat = 1
-servo = {"pan":13, "tilt":11}
-angle = {"pan":90, "tilt":90}
+servo = {"pan":13, "tlt":11}
+angle = {"pan":0, "tlt":0}
+moveServo(servo["pan"], angle["pan"])
+moveServo(servo["tlt"], angle["tlt"])
 
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/data/classifier/lbpcascades'
-                                    '/lbpcascade_frontalface.xml')
+                                    '/lbpcascade_frontalface_improved.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/dynamic/trainer.yml')
 subjects = ['Label start from 1', 'Danil', 'Ayu', 'Yoga', 'Toni']
@@ -169,11 +158,12 @@ rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/movingTracker.avi', c
 ret, frame = cam.read()
 frame = cv2.flip(frame, -1)
 cv2.imshow('frame', frame)
-while stat == 1:
+stat, target, angle["pan"], angle["tlt"] = initUrl()
+print(angle)
+moveServo(servo["pan"], angle["pan"])
+moveServo(servo["tlt"], angle["tlt"])
+while stat == "Running":
     tracker = cv2.TrackerKCF_create()
-    target, angle["pan"], angle["tilt"] = initUrl()
-    moveServo(servo["pan"], angle["pan"])
-    moveServo(servo["tilt"], angle["tilt"])
     bbox = searchTarget()
     trackTarget(bbox)
     k = cv2.waitKey(10) & 0xff
@@ -181,6 +171,8 @@ while stat == 1:
         stat = 0
         break
 
+moveServo(servo["pan"], 0)
+moveServo(servo["tlt"], 0)
 cv2.destroyAllWindows()
 rec.release()
 cam.release()
