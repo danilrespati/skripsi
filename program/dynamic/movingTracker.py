@@ -85,6 +85,7 @@ def trackTarget(bbox):
             frame = cv2.flip(frame, -1)
             tracked, bbox = tracker.update(frame)
             drawRectangle(frame, bbox)
+            drawText(frame, "test", 10, 10)
             rec.write(frame)
             cv2.imshow('frame', frame)
             offsetCheck(bbox)
