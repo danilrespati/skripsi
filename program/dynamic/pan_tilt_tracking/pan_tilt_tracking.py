@@ -96,16 +96,17 @@ def set_servos(pan, tlt):
 		# the pan and tilt angles are reversed
 		panAngle = 1 * pan.value
 		tltAngle = 1 * tlt.value
+		time.sleep(0.4)
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
-			if (abs(panAngle - panLast) >= 0.2):
+			if (abs(panAngle - panLast) >= 0.5):
 				moveServo(13 ,round(panAngle,2))
 				panLast = panAngle
 
 		# if the tilt angle is within the range, tilt
 		if in_range(tltAngle, servoRange[0], servoRange[1]):
-			if (abs(tltAngle - tltLast) >= 0.2):
+			if (abs(tltAngle - tltLast) >= 0.5):
 				moveServo(11 ,round(tltAngle,2))
 				tltLast = tltAngle
 
@@ -132,7 +133,7 @@ if __name__ == "__main__":
 		tlt = manager.Value("i", 0)
 
 		# set PID values for panning
-		panP = manager.Value("f", 0.5)
+		panP = manager.Value("f", 0.1)
 		panI = manager.Value("f", 0.0)
 		panD = manager.Value("f", 0.0)
 
@@ -158,13 +159,13 @@ if __name__ == "__main__":
 		# start all 4 processes
 		processObjectCenter.start()
 		processPanning.start()
-		processTilting.start()
+		#processTilting.start()
 		processSetServos.start()
 
 		# join all 4 processes
 		processObjectCenter.join()
 		processPanning.join()
-		processTilting.join()
+		#processTilting.join()
 		processSetServos.join()
 
 # USAGE
