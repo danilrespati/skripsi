@@ -125,12 +125,12 @@ if __name__ == "__main__":
 		tlt = manager.Value("i", 0)
 
 		# set PID values for panning
-		panP = manager.Value("f", 0.025)
+		panP = manager.Value("f", 1)
 		panI = manager.Value("f", 0.0)
 		panD = manager.Value("f", 0.0)
 
 		# set PID values for tilting
-		tiltP = manager.Value("f", 0.025)
+		tiltP = manager.Value("f", 1)
 		tiltI = manager.Value("f", 0.0)
 		tiltD = manager.Value("f", 0.0)
 
