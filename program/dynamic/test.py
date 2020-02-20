@@ -101,10 +101,10 @@ def offsetCheck(bbox):
     x = int(bbox[0] + (bbox[2] / 2))
     y = int(bbox[1] + (bbox[3] / 2))
     centerBox = {
-        "xMin":250,
-        "xMax":390,
-        "yMin":100,
-        "yMax":380
+        "xMin":290,
+        "xMax":350,
+        "yMin":150,
+        "yMax":300
         }
     servoRange = {
         "panMin":-90,
