@@ -7,8 +7,8 @@ import numpy as np
 def initCam():
 	global frameWidth
 	global frameHeight
-	frameWidth = 1280
-	frameHeight = 720
+	frameWidth = 640
+	frameHeight = 360
 	brightness = 0.6
 	cam = cv2.VideoCapture(0)
 	cam.set(3, frameWidth)
@@ -35,9 +35,9 @@ cam = initCam()
 flag = 0
 line = 0
 
-image = cv2.imread("/home/pi/skripsi/data/cal2mStatic.png")
+image = cv2.imread("/home/pi/skripsi/data/cal3mStatic640x360.png")
 cv2.imshow('Preview',image)
-knownDistance = 200
+knownDistance = 300
 knownHeight = 0.5
 marker = findMarker(image)
 focalLength = (marker[1][1] * knownDistance) / knownHeight
