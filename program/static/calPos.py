@@ -36,7 +36,6 @@ flag = 0
 line = 0
 
 image = cv2.imread("/home/pi/skripsi/data/cal3mStatic640x360.png")
-cv2.imshow('Preview',image)
 knownDistance = 300
 knownHeight = 0.5
 marker = findMarker(image)
