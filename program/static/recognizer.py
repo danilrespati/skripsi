@@ -20,7 +20,7 @@ def timer(*con): #Need to import time first
 
 def initCam():
     global frameSize
-    frameSize = [1280, 720]
+    frameSize = [640, 360]
     brightness = 0.6
     cap = cv2.VideoCapture(0)
     cap.set(3, frameSize[0])
