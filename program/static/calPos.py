@@ -33,6 +33,7 @@ def pixelPerMetric(height, perKnownHeight):
 
 cam = initCam()
 flag = 0
+line = 0
 
 image = cv2.imread("/home/pi/skripsi/data/cal2mStatic.png")
 cv2.imshow('Preview',image)
