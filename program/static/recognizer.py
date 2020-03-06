@@ -77,7 +77,7 @@ def sendAngle(stat, target, pos, angle):
     f.close()
 
 def posToDist(pos):
-    ppm = 402 #Calibrate from calPos.py static
+    ppm = 335 #Calibrate from calPos.py static
     ppc = ppm/100
     centerX = frameSize[0]//2
     centerY = frameSize[1]//2
