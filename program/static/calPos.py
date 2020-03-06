@@ -44,7 +44,8 @@ focalLength = (marker[1][1] * knownDistance) / knownHeight
 while True:
 	ret, frame = cam.read()
 	frame = cv2.flip(frame, -1)
-	#cv2.line(frame, (int(frameWidth/2),0), (int(frameWidth/2),frameHeight), (0,0,255), 4)
+	if line:
+		cv2.line(frame, (int(frameWidth/2),0), (int(frameWidth/2),frameHeight), (0,0,255), 4)
 	while(flag==0):
 		roi = cv2.selectROI(frame)
 		flag = 1
@@ -62,6 +63,8 @@ while True:
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord('q'):
 		flag = 0
+	if key == ord('l'):
+		line = 1 if line == 0 else 0
 	if key == 27:
 		print(distance)
 		print(ppm)
