@@ -12,20 +12,22 @@ def initCam():
     cap.set(10, brightness)
     return cap
 
+cam = initCam()
+flag = 0
+
 while True:
     ret, frame = cam.read()
     frame = cv2.flip(frame, -1)
     if(flag==0):
         roi = cv2.selectROI(frame)
         flag = 1
-        cv2.imwrite("/home/pi/skripsi/data/user/static/User." + str(label) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        cv2.imwrite("/home/pi/skripsi/data/calibration.jpg", frame[roi[1]:roi[1]+roi[3],roi[0]:roi[0]+roi[2]])
     cv2.imshow('Preview',frame)
+    key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         flag = 0
     if key == 27:
-        print(distance)
-        print(ppm)
         break
 
 cv2.destroyAllWindows()
-cap.release()
+cam.release()
