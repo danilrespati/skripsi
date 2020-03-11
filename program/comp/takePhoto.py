@@ -4,7 +4,7 @@ import numpy as np
 
 def initCam():
     global frameSize
-    frameSize = [640, 360]
+    frameSize = [800, 450]
     brightness = 0.6
     cap = cv2.VideoCapture(0)
     cap.set(3, frameSize[0])

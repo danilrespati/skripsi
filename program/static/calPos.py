@@ -35,9 +35,9 @@ cam = initCam()
 flag = 0
 line = 0
 
-image = cv2.imread("/home/pi/skripsi/data/cal3mStatic640x360.jpg")
+image = cv2.imread("/home/pi/skripsi/data/cal2mstatic640x360.jpg")
 cv2.imshow('Preview',image)
-knownDistance = 300
+knownDistance = 200
 knownHeight = 0.5
 marker = findMarker(image)
 focalLength = (marker[1][1] * knownDistance) / knownHeight
@@ -58,8 +58,8 @@ while True:
 	box = np.int0(box)
 	cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
 	cv2.putText(frame, "{0} {1}".format(round(distance,2), round(ppm,2)),
-		(0, image.shape[0] - 120), cv2.FONT_HERSHEY_SIMPLEX,
-		0.5, (0, 255, 0), 2)
+		(0,10), cv2.FONT_HERSHEY_SIMPLEX,
+		0.5, (0, 0, 0), 1)
 	cv2.imshow('Preview',frame)
 	key = cv2.waitKey(1) & 0xFF
 	if key == ord('q'):

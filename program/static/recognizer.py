@@ -77,14 +77,14 @@ def sendAngle(stat, target, pos, angle):
     f.close()
 
 def posToDist(pos):
-    ppm = 335 #Calibrate from calPos.py static
+    ppm = 168 #Calibrate from calPos.py static
     ppc = ppm/100
     centerX = frameSize[0]//2
     centerY = frameSize[1]//2
     deltaX = (centerX - pos["x"])*(-1)
     deltaY = (centerY - pos["y"])*(1)
     dist = [deltaX//ppc, deltaY//ppc]
-    dist[1] = dist[1] + 30 #camStatic and camDynamic diff height
+    dist[1] = dist[1] + 23 #camStatic and camDynamic diff height
     return dist
 
 def distToAngle(dist):
