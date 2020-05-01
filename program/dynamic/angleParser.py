@@ -16,7 +16,7 @@ def initCam():
     return cap
 
 def initUrl():
-    url = 'http://192.168.100.13/skripsi/target.php'
+    url = 'http://192.168.0.120/skripsi/target.php'
     web = urllib.request.urlopen(url)
     html = web.read()
     soup = BeautifulSoup(html, 'lxml')
