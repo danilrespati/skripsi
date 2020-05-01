@@ -3,21 +3,6 @@ import os
 import numpy as np
 import math
 
-def drawRectangle(frame, bbox):
-    (x, y, w, h) = bbox
-    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-def drawText(frame, text, x, y):
-    cv2.putText(frame, text, (x, y), 
-                cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
-
-def timer(*con): #Need to import time first
-    global startTime
-    if(con[0] == "start"):
-        startTime = time.time()
-    if(con[0] =="stop"):
-        print("--- {0} executed in {1} seconds ---\n".format(con[1], (time.time() - startTime)))
-
 def initCam():
     global frameSize
     frameSize = [640, 360]
@@ -38,25 +23,15 @@ def searchTarget():
         for(x, y, w, h) in faces:
             label, confidence = recognizer.predict(gray[y:y+h, x:x+w])
             if (subjects[label] == target):
-                cv2.imshow('Target', frame[y:y+h, x:x+w])
                 bbox = (x, y, w, h)
-                drawRectangle(frame, bbox)
-                drawText(frame, subjects[label], x, y-5)
                 posX = int(bbox[0] + (bbox[2] / 2))
                 posY = int(bbox[1] + (bbox[3] / 2))
+                print()
                 found = True
                 break
-        cv2.imshow('frame', frame)
-        rec.write(frame)
         if found:
             break
 
-        k = cv2.waitKey(10) & 0xff 
-        if k == 27:
-            stat = 0
-            posX = pos["x"]
-            posY = pos["y"]
-            break
     return posX, posY
 
 def sendAngle(stat, target, pos, angle):
@@ -108,23 +83,15 @@ faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                     '/lbpcascade_frontalface.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
-subjects = ['Label start from 1', 'Danil', 'Yoga', 'kosong', 'kosong']
+#based from dataset taken
+subjects = ['Label start from 1', 'Danil', 'Yoga', 'Dede', 'Guntur', 'Rizal']
 
 cam = initCam()
-if os.path.exists("/home/pi/skripsi/data/video/static/recognizer.avi"):
-    os.remove("/home/pi/skripsi/data/video/static/recognizer.avi")
-rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/recognizer.avi', cv2.VideoWriter_fourcc(
-    'M', 'J', 'P', 'G'), 10, (frameSize[0], frameSize[1]))
 
 while stat:
     pos["x"], pos["y"] = searchTarget()
     angle["pan"], angle["tlt"] = posToAngle(pos)
     sendAngle(stat, target, pos, angle)
-    
-    k = cv2.waitKey(10) & 0xff  
-    if k == 27:
-        stat = 0
-        sendAngle(stat, target, pos, angle)
 
 print("\n[INFO] Exiting Program and cleanup stuff")
 cam.release()
