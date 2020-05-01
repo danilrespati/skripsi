@@ -26,7 +26,7 @@ def searchTarget():
                 bbox = (x, y, w, h)
                 posX = int(bbox[0] + (bbox[2] / 2))
                 posY = int(bbox[1] + (bbox[3] / 2))
-                print("{0}, {1}, {2}\n".format(target, posX, posY))
+                print()
                 found = True
                 break
         if found:
