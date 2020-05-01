@@ -95,5 +95,4 @@ while stat:
 
 print("\n[INFO] Exiting Program and cleanup stuff")
 cam.release()
-rec.release()
 cv2.destroyAllWindows()
