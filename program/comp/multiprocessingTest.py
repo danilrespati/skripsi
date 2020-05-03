@@ -8,6 +8,16 @@ import os
 import numpy as np
 import math
 
+def initCam():
+    global frameSize
+    frameSize = [640, 360]
+    brightness = 0.6
+    cap = cv2.VideoCapture(0)
+    cap.set(3, frameSize[0])
+    cap.set(4, frameSize[1])
+    cap.set(10, brightness)
+    return cap
+    
 def signal_handler(sig, frame):
     # print a status message
     print("[INFO] You pressed `ctrl + c`! Exiting...")
