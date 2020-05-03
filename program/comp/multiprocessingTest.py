@@ -1,8 +1,18 @@
 from multiprocessing import Process, Manager, Value
 import socket
 import time
+import signal
+import sys
+
+ef signal_handler(sig, frame):
+    # print a status message
+    print("[INFO] You pressed `ctrl + c`! Exiting...")
+
+    # exit
+    sys.exit()
 
 def server(waktu):
+    signal.signal(signal.SIGINT, signal_handler)
     while True:
         msg = "The time is {0}".format(time.time())
         clientsocket, address = s.accept()
@@ -10,7 +20,11 @@ def server(waktu):
         clientsocket.send(bytes(msg, "utf-8"))
 
 def mainproc():
-    waktu.value = time.time()
+    signal.signal(signal.SIGINT, signal_handler)
+    while True:
+        waktu.value = time.time()
+
+
 
 if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
