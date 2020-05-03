@@ -30,7 +30,7 @@ def signal_handler(sig, frame):
 def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
-        msg = "The time is {0}".format(data)
+        msg = "The time is {0}".format(data.value)
         clientsocket, address = s.accept()
         print("Connection from {0} has been established!".format(address))
         clientsocket.send(bytes(msg, "utf-8"))
