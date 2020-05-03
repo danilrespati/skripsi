@@ -17,7 +17,7 @@ def initCam():
     cap.set(4, frameSize[1])
     cap.set(10, brightness)
     return cap
-    
+
 def signal_handler(sig, frame):
     # print a status message
     print("[INFO] You pressed `ctrl + c`! Exiting...")
@@ -30,7 +30,7 @@ def signal_handler(sig, frame):
 def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
-        msg = "The time is {0}".format(time.time())
+        msg = "The time is {0}".format(data)
         clientsocket, address = s.accept()
         print("Connection from {0} has been established!".format(address))
         clientsocket.send(bytes(msg, "utf-8"))
