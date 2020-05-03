@@ -4,7 +4,7 @@ import time
 import signal
 import sys
 
-ef signal_handler(sig, frame):
+def signal_handler(sig, frame):
     # print a status message
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
