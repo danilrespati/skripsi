@@ -17,6 +17,7 @@ if __name__ == "__main__":
     s.bind(("192.168.0.120", 1234))
     s.listen(5)
 
+    manager = Manager()
     waktu = manager.Value('i', 0)
 
     processServer = Process(target=server,
