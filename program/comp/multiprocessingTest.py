@@ -20,8 +20,7 @@ if __name__ == "__main__":
     manager = Manager()
     waktu = manager.Value('i', 0)
 
-    processServer = Process(target=server,
-        args=(waktu))
+    processServer = Process(target=server, args=(waktu,))
     processMainproc = Process(target=mainproc)
 
     # start all processes
