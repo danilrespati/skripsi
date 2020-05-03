@@ -3,6 +3,10 @@ import socket
 import time
 import signal
 import sys
+import cv2
+import os
+import numpy as np
+import math
 
 def signal_handler(sig, frame):
     # print a status message
@@ -11,7 +15,7 @@ def signal_handler(sig, frame):
     # exit
     sys.exit()
 
-def server(waktu):
+def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         msg = "The time is {0}".format(time.time())
@@ -22,7 +26,19 @@ def server(waktu):
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
     while True:
-        waktu.value = time.time()
+        found = False
+        ret, frame = cam.read()
+        frame = cv2.flip(frame, -1)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = faceCascade.detectMultiScale(gray, 1.3, 5)
+        for(x, y, w, h) in faces:
+            bbox = (x, y, w, h)
+            posX = int(bbox[0] + (bbox[2] / 2))
+            posY = int(bbox[1] + (bbox[3] / 2))
+            print("{0}, {1}, {2}\n".format(target, posX, posY))
+            found = True
+        if found:
+            data.value = time.time()
 
 
 
@@ -32,9 +48,9 @@ if __name__ == "__main__":
     s.listen(5)
 
     manager = Manager()
-    waktu = manager.Value('i', 0)
+    data = manager.Value('i', 0)
 
-    processServer = Process(target=server, args=(waktu,))
+    processServer = Process(target=server, args=(data, ))
     processMainproc = Process(target=mainproc)
 
     # start all processes
