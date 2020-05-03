@@ -13,6 +13,8 @@ def signal_handler(sig, frame):
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
     # exit
+    cam.release()
+    cv2.destroyAllWindows()
     sys.exit()
 
 def server(data):
@@ -46,6 +48,14 @@ if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(("192.168.0.120", 1234))
     s.listen(5)
+
+    target = 'Danil'
+    pos = {"x":0, "y":0}
+    angle = {"pan":0, "tlt":0}
+    faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+                                        '/data/classifier/lbpcascades'
+                                        '/lbpcascade_frontalface.xml')
+    cam = initCam()
 
     manager = Manager()
     data = manager.Value('i', 0)
