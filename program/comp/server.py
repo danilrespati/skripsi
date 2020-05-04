@@ -1,5 +1,6 @@
 import socket
 import time
+import pickle
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(("192.168.0.120", 1234))
