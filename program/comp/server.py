@@ -6,7 +6,8 @@ s.bind(("192.168.0.120", 1234))
 s.listen(5)
 
 while True:
-    msg = "The time is {0}".format(time.time())
+    data = {"trg": "Danil", "pan": 10.5, "tme": time.time()}
+    msg = pickle.dumps(data)
     clientsocket, address = s.accept()
     print("Connection from {0} has been established!".format(address))
-    clientsocket.send(bytes(msg, "utf-8"))
+    clientsocket.send(msg)
