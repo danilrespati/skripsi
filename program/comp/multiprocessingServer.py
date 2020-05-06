@@ -40,7 +40,7 @@ def server(data):
         print("Connection from {0} has been established!".format(address))
         clientsocket.send(msg)
 
-def mainproc():
+def mainproc(target, pos, angle):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         found = False
@@ -50,12 +50,14 @@ def mainproc():
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for(x, y, w, h) in faces:
             bbox = (x, y, w, h)
-            posX = int(bbox[0] + (bbox[2] / 2))
-            posY = int(bbox[1] + (bbox[3] / 2))
-            print("{0}, {1}, {2}\n".format(target, posX, posY))
+            pos["x"] = int(bbox[0] + (bbox[2] / 2))
+            pos["y"] = int(bbox[1] + (bbox[3] / 2))
+            print("{0}, {1}, {2}\n".format(target, pos["x"], pos["y"]))
+            angle["pan"], angle["tlt"] = posToAngle(pos)
             found = True
         if found:
-            data.value = time.time()
+            data["pan"] = angle["pan"]
+            data["tlt"] = angle["tlt"]
 
 def posToDist(pos):
     ppm = 168 #Calibrate from calPos.py static
@@ -88,11 +90,12 @@ if __name__ == "__main__":
     data = manager.dict()
 
     target = input('Target: ')
-    data["target"] = target
     pos = {"x":0, "y":0}
     angle = {"pan":0, "tlt":0}
+    data["target"] = target
     data["pan"] = angle["pan"]
     data["tlt"] = angle["tlt"]
+
     faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                         '/data/classifier/lbpcascades'
                                         '/lbpcascade_frontalface.xml')
@@ -102,7 +105,7 @@ if __name__ == "__main__":
     cam = initCam()
 
     processServer = Process(target=server, args=(data, ))
-    processMainproc = Process(target=mainproc)
+    processMainproc = Process(target=mainproc, args=(target, pos, angle))
 
     # start all processes
     processServer.start()
