@@ -52,23 +52,49 @@ def mainproc():
         if found:
             data.value = time.time()
 
+def posToDist(pos):
+    ppm = 168 #Calibrate from calPos.py static
+    ppc = ppm/100
+    centerX = frameSize[0]//2
+    centerY = frameSize[1]//2
+    deltaX = (centerX - pos["x"])*(-1)
+    deltaY = (centerY - pos["y"])*(1)
+    dist = [deltaX//ppc, deltaY//ppc]
+    dist[1] = dist[1] + 23 #camStatic and camDynamic diff height
+    return dist
 
+def distToAngle(dist):
+    camDist = 200 #Calibrate from calPos.py dynamic
+    pan = math.degrees(math.atan(dist[0]/camDist))
+    tlt = math.degrees(math.atan(dist[1]/camDist))
+    return round(pan,1), round(tlt,1)
+
+def posToAngle(pos):
+    dist = posToDist(pos)
+    angle = distToAngle(dist)
+    return angle[0], angle[1]
 
 if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(("192.168.0.120", 1234))
     s.listen(5)
 
-    target = 'Danil'
+    manager = Manager()
+    data = manager.dict()
+
+    target = input('Target: ')
+    data["target"] = target
     pos = {"x":0, "y":0}
     angle = {"pan":0, "tlt":0}
+    data["pan"] = angle["pan"]
+    data["tlt"] = angle["tlt"]
     faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
                                         '/data/classifier/lbpcascades'
                                         '/lbpcascade_frontalface.xml')
+    recognizer = cv2.face.LBPHFaceRecognizer_create()
+    recognizer.read('/home/pi/skripsi/data/trainer/static/trainer.yml')
+    subjects = ['Label start from 1', 'Danil', 'Yoga', 'Dede', 'Guntur', 'Rizal']
     cam = initCam()
-
-    manager = Manager()
-    data = manager.Value('i', 0)
 
     processServer = Process(target=server, args=(data, ))
     processMainproc = Process(target=mainproc)
