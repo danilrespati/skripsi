@@ -50,7 +50,7 @@ def mainproc():
             print("{0}, {1}, {2}\n".format(target, posX, posY))
             found = True
         if found:
-            data.value = time.time()
+            #data.value = time.time()
 
 def posToDist(pos):
     ppm = 168 #Calibrate from calPos.py static
