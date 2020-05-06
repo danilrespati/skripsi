@@ -31,7 +31,11 @@ def signal_handler(sig, frame):
 def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
-        msg = pickle.dumps(data)
+        msg = dict()
+        msg["target"] = data["target"]
+        msg["pan"] = data["pan"]
+        msg["tlt"] = data["tlt"]
+        msg = pickle.dumps(msg)
         clientsocket, address = s.accept()
         print("Connection from {0} has been established!".format(address))
         clientsocket.send(msg)
@@ -50,6 +54,8 @@ def mainproc():
             posY = int(bbox[1] + (bbox[3] / 2))
             print("{0}, {1}, {2}\n".format(target, posX, posY))
             found = True
+        if found:
+            data.value = time.time()
 
 def posToDist(pos):
     ppm = 168 #Calibrate from calPos.py static
