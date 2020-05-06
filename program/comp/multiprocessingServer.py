@@ -37,7 +37,7 @@ def server(data):
         msg["tlt"] = data["tlt"]
         msg = pickle.dumps(msg)
         clientsocket, address = s.accept()
-        print("Connection from {0} has been established!".format(address))
+        #print("Connection from {0} has been established!".format(address))
         clientsocket.send(msg)
 
 def mainproc(target, pos, angle):
@@ -52,7 +52,7 @@ def mainproc(target, pos, angle):
             bbox = (x, y, w, h)
             pos["x"] = int(bbox[0] + (bbox[2] / 2))
             pos["y"] = int(bbox[1] + (bbox[3] / 2))
-            print("{0}, {1}, {2}\n".format(target, pos["x"], pos["y"]))
+            #print("{0}, {1}, {2}\n".format(target, pos["x"], pos["y"]))
             angle["pan"], angle["tlt"] = posToAngle(pos)
             found = True
         if found:
