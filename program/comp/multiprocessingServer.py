@@ -32,9 +32,9 @@ def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         msg = dict()
-        msg[1] = data["target"]
-        msg[2] = data["pan"]
-        msg[3] = data["tlt"]
+        msg["target"] = data["target"]
+        msg["pan"] = data["pan"]
+        msg["tlt"] = data["tlt"]
         msg = pickle.dumps(msg)
         clientsocket, address = s.accept()
         print("Connection from {0} has been established!".format(address))
