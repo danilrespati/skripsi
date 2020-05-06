@@ -7,6 +7,7 @@ import cv2
 import os
 import numpy as np
 import math
+import pickle
 
 def initCam():
     global frameSize
@@ -30,10 +31,10 @@ def signal_handler(sig, frame):
 def server(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
-        msg = "The time is {0}".format(data.value)
+        msg = pickle.dumps(data)
         clientsocket, address = s.accept()
         print("Connection from {0} has been established!".format(address))
-        clientsocket.send(bytes(msg, "utf-8"))
+        clientsocket.send(msg)
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
