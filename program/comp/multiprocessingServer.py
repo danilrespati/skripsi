@@ -49,8 +49,6 @@ def mainproc():
             posY = int(bbox[1] + (bbox[3] / 2))
             print("{0}, {1}, {2}\n".format(target, posX, posY))
             found = True
-        if found:
-            #data.value = time.time()
 
 def posToDist(pos):
     ppm = 168 #Calibrate from calPos.py static
