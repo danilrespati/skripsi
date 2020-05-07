@@ -64,18 +64,20 @@ def moveServo(servo, angle):
 def setServos(data):
     signal.signal(signal.SIGINT, signal_handler)
     servo = {"pan":13, "tlt":11}
+    lastPan = 0
+    lastTlt = 0
     while True:
         print(data)
-        moveServo(servo["pan"], data["pan"])
-        moveServo(servo["tlt"], data["tlt"])
+        if(data["pan"] != lastPan):
+            moveServo(servo["pan"], data["pan"])
+            lastPan = data["pan"]
+        if(data["tlt"] != lastTlt):
+            moveServo(servo["tlt"], data["tlt"])
+            lastTlt = data["tlt"]
         time.sleep(0.2)
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
-    if os.path.exists("/home/pi/skripsi/data/video/dynamic/angleParser.avi"):
-        os.remove("/home/pi/skripsi/data/video/dynamic/angleParser.avi")
-    rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/angleParser.avi', cv2.VideoWriter_fourcc(
-        'M', 'J', 'P', 'G'), 10, (frameSize[0], frameSize[1]))
     while True:
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
@@ -90,6 +92,10 @@ if __name__ == "__main__":
     data["tlt"] = 0
 
     cam = initCam()
+    if os.path.exists("/home/pi/skripsi/data/video/dynamic/angleParser.avi"):
+        os.remove("/home/pi/skripsi/data/video/dynamic/angleParser.avi")
+    rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/angleParser.avi', cv2.VideoWriter_fourcc(
+        'M', 'J', 'P', 'G'), 20, (frameSize[0], frameSize[1]))
 
     processClient = Process(target=client)
     processSetServos = Process(target=setServos, args=(data, ))
