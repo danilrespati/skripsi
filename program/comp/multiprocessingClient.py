@@ -34,7 +34,10 @@ def client():
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(("192.168.0.120", 1234))
         msg = s.recv(512)
-        print(pickle.loads(msg))
+        msg = pickle.loads(msg)
+        data["target"] = msg["target"]
+        data["pan"] = msg["pan"]
+        data["tlt"] = msg["tlt"]
         time.sleep(0.2)
 
 def mainproc(data):
