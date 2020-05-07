@@ -53,7 +53,7 @@ def moveServo(servo, angle):
         #dutyCycle = angle / 10
         dutyCycle = ((angle*-1)+126) / 18
         pwm.ChangeDutyCycle(dutyCycle)
-        sleep(0.3)
+        time.sleep(0.3)
         pwm.stop()
     else:
         print("Limit: -90 <= angle <= 90")
