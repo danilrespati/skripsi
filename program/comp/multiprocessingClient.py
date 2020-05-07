@@ -40,7 +40,7 @@ def client():
         data["tlt"] = msg["tlt"]
         time.sleep(0.2)
 
-def mainproc(data):
+def serServos(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         print(data)
@@ -57,12 +57,12 @@ if __name__ == "__main__":
     cam = initCam()
 
     processClient = Process(target=client)
-    processMainproc = Process(target=mainproc, args=(data, ))
+    processSetServos = Process(target=setServos, args=(data, ))
 
     # start all processes
     processClient.start()
-    processMainproc.start()
+    processSetServos.start()
 
     # join all processes
     processClient.join()
-    processMainproc.join()
+    processSetServos.join()
