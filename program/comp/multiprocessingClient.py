@@ -40,10 +40,17 @@ def client():
         data["tlt"] = msg["tlt"]
         time.sleep(0.2)
 
+def moveServo(servo, angle):
+    os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
+
 def setServos(data):
     signal.signal(signal.SIGINT, signal_handler)
+    servo = {"pan":13, "tlt":11}
     while True:
         print(data)
+        moveServo(servo["pan"], data["pan"])
+        moveServo(servo["tlt"], data["tlt"])
         time.sleep(0.2)
 
 if __name__ == "__main__":
