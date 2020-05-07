@@ -74,7 +74,7 @@ def setServos(data):
         if(data["tlt"] != lastTlt):
             moveServo(servo["tlt"], data["tlt"])
             lastTlt = data["tlt"]
-        time.sleep(0.2)
+        time.sleep(0.8)
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     if os.path.exists("/home/pi/skripsi/data/video/dynamic/angleParser.avi"):
         os.remove("/home/pi/skripsi/data/video/dynamic/angleParser.avi")
     rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/angleParser.avi', cv2.VideoWriter_fourcc(
-        'M', 'J', 'P', 'G'), 20, (frameSize[0], frameSize[1]))
+        'M', 'J', 'P', 'G'), 30, (frameSize[0], frameSize[1]))
 
     processClient = Process(target=client)
     processSetServos = Process(target=setServos, args=(data, ))
