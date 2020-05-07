@@ -25,8 +25,8 @@ def signal_handler(sig, frame):
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
     # exit
-    moveServo(servo["pan"], 0)
-    moveServo(servo["tlt"], 0)
+    moveServo(13, 0)
+    moveServo(11, 0)
     rec.release()
     cam.release()
     sys.exit()
