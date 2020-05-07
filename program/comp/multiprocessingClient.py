@@ -25,8 +25,10 @@ def signal_handler(sig, frame):
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
     # exit
+    moveServo(servo["pan"], 0)
+    moveServo(servo["tlt"], 0)
+    rec.release()
     cam.release()
-    cv2.destroyAllWindows()
     sys.exit()
 
 def client():
@@ -68,6 +70,17 @@ def setServos(data):
         moveServo(servo["tlt"], data["tlt"])
         time.sleep(0.2)
 
+def mainproc():
+    signal.signal(signal.SIGINT, signal_handler)
+    if os.path.exists("/home/pi/skripsi/data/video/dynamic/angleParser.avi"):
+        os.remove("/home/pi/skripsi/data/video/dynamic/angleParser.avi")
+    rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/angleParser.avi', cv2.VideoWriter_fourcc(
+        'M', 'J', 'P', 'G'), 10, (frameSize[0], frameSize[1]))
+    while True:
+        ret, frame = cam.read()
+        frame = cv2.flip(frame, -1)
+        rec.write(frame)
+
 if __name__ == "__main__":
     manager = Manager()
     data = manager.dict()
@@ -80,11 +93,14 @@ if __name__ == "__main__":
 
     processClient = Process(target=client)
     processSetServos = Process(target=setServos, args=(data, ))
+    processMainproc = Process(target=mainproc)
 
     # start all processes
     processClient.start()
     processSetServos.start()
+    processMainproc.start()
 
     # join all processes
     processClient.join()
     processSetServos.join()
+    processMainproc.join()
