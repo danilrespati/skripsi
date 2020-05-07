@@ -40,7 +40,7 @@ def client():
         data["tlt"] = msg["tlt"]
         time.sleep(0.2)
 
-def serServos(data):
+def setServos(data):
     signal.signal(signal.SIGINT, signal_handler)
     while True:
         print(data)
