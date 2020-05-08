@@ -49,12 +49,14 @@ def mainproc(target, pos, angle):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for(x, y, w, h) in faces:
-            bbox = (x, y, w, h)
-            pos["x"] = int(bbox[0] + (bbox[2] / 2))
-            pos["y"] = int(bbox[1] + (bbox[3] / 2))
-            #print("{0}, {1}, {2}\n".format(target, pos["x"], pos["y"]))
-            angle["pan"], angle["tlt"] = posToAngle(pos)
-            found = True
+            label, confidence = recognizer.predict(gray[y:y+h, x:x+w])
+            if (subjects[label] == target):
+                bbox = (x, y, w, h)
+                pos["x"] = int(bbox[0] + (bbox[2] / 2))
+                pos["y"] = int(bbox[1] + (bbox[3] / 2))
+                #print("{0}, {1}, {2}\n".format(target, pos["x"], pos["y"]))
+                angle["pan"], angle["tlt"] = posToAngle(pos)
+                found = True
         if found:
             data["pan"] = angle["pan"]
             data["tlt"] = angle["tlt"]
