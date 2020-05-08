@@ -82,8 +82,8 @@ def mainproc():
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
         cv2.putText(frame, data["target"], (100, 100), 
-            cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)\
-        time.sleep(0.1)
+            cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
+        time.sleep(0.07)
         rec.write(frame)
 
 if __name__ == "__main__":
