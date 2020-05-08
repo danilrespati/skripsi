@@ -25,7 +25,6 @@ def signal_handler(sig, frame):
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
     # exit
-    GPIO.cleanup()
     moveServo(13, 0)
     moveServo(11, 0)
     rec.release()
@@ -56,7 +55,7 @@ def moveServo(servo, angle):
         #dutyCycle = angle / 10
         dutyCycle = ((angle*-1)+126) / 18
         pwm.ChangeDutyCycle(dutyCycle)
-        time.sleep(0.3)
+        time.sleep(0.8)
         pwm.stop()
     else:
         print("Limit: -90 <= angle <= 90")
@@ -70,13 +69,12 @@ def setServos(data):
     moveServo(servo["pan"], 0)
     moveServo(servo["tlt"], 0)
     while True:
-        if(abs(data["pan"] - lastPan) >= 2):
+        if(abs(data["pan"] - lastPan) >= 1):
             moveServo(servo["pan"], data["pan"])
             lastPan = data["pan"]
-        if(abs(data["tlt"] - lastTlt) >= 2):
+        if(abs(data["tlt"] - lastTlt) >= 1):
             moveServo(servo["tlt"], data["tlt"])
             lastTlt = data["tlt"]
-        time.sleep(0.3)
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
