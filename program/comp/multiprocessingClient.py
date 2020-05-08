@@ -83,7 +83,7 @@ def mainproc():
         frame = cv2.flip(frame, -1)
         cv2.putText(frame, data["target"], (100, 100), 
             cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
-        time.sleep(0.07)
+        time.sleep(0.02)
         rec.write(frame)
 
 if __name__ == "__main__":
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     if os.path.exists("/home/pi/skripsi/data/video/dynamic/angleParser.avi"):
         os.remove("/home/pi/skripsi/data/video/dynamic/angleParser.avi")
     rec = cv2.VideoWriter('/home/pi/skripsi/data/video/dynamic/angleParser.avi', cv2.VideoWriter_fourcc(
-        'M', 'J', 'P', 'G'), 10, (frameSize[0], frameSize[1]))
+        'M', 'J', 'P', 'G'), 20, (frameSize[0], frameSize[1]))
 
     processClient = Process(target=client)
     processSetServos = Process(target=setServos, args=(data, ))
