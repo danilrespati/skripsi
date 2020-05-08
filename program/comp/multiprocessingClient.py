@@ -79,12 +79,14 @@ def setServos(data):
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
     while True:
+        start=time.time()
         ret, frame = cam.read()
         frame = cv2.flip(frame, -1)
         cv2.putText(frame, data["target"], (100, 100), 
             cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
         rec.write(frame)
-        time.sleep(0.1)
+        finish=time.time()
+        print(finish-start)
 
 if __name__ == "__main__":
     manager = Manager()
