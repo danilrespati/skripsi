@@ -70,10 +70,10 @@ def setServos(data):
     moveServo(servo["pan"], 0)
     moveServo(servo["tlt"], 0)
     while True:
-        if(abs(data["pan"] - lastPan) >= 5):
+        if(abs(data["pan"] - lastPan) >= 2):
             moveServo(servo["pan"], data["pan"])
             lastPan = data["pan"]
-        if(abs(data["tlt"] - lastTlt) >= 5):
+        if(abs(data["tlt"] - lastTlt) >= 2):
             moveServo(servo["tlt"], data["tlt"])
             lastTlt = data["tlt"]
         time.sleep(0.3)
