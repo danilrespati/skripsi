@@ -70,13 +70,13 @@ def setServos(data):
     moveServo(servo["pan"], 0)
     moveServo(servo["tlt"], 0)
     while True:
-        if(abs(data["pan"] - lastPan) >= 0.5):
+        if(abs(data["pan"] - lastPan) >= 5):
             moveServo(servo["pan"], data["pan"])
             lastPan = data["pan"]
-        if(abs(data["tlt"] - lastTlt) >= 0.5):
+        if(abs(data["tlt"] - lastTlt) >= 5):
             moveServo(servo["tlt"], data["tlt"])
             lastTlt = data["tlt"]
-        time.sleep(1)
+        time.sleep(0.3)
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
