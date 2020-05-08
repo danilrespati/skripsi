@@ -25,6 +25,7 @@ def signal_handler(sig, frame):
     print("[INFO] You pressed `ctrl + c`! Exiting...")
 
     # exit
+    GPIO.cleanup()
     moveServo(13, 0)
     moveServo(11, 0)
     rec.release()
