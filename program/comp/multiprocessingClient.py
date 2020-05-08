@@ -55,7 +55,7 @@ def moveServo(servo, angle):
         #dutyCycle = angle / 10
         dutyCycle = ((angle*-1)+126) / 18
         pwm.ChangeDutyCycle(dutyCycle)
-        time.sleep(0.3)
+        time.sleep(2)
         pwm.stop()
     else:
         print("Limit: -90 <= angle <= 90")
@@ -72,11 +72,9 @@ def setServos(data):
         if(abs(data["pan"] - lastPan) >= 0.5):
             moveServo(servo["pan"], data["pan"])
             lastPan = data["pan"]
-            print("pan")
         if(abs(data["tlt"] - lastTlt) >= 0.5):
             moveServo(servo["tlt"], data["tlt"])
             lastTlt = data["tlt"]
-            print("tlt")
 
 def mainproc():
     signal.signal(signal.SIGINT, signal_handler)
