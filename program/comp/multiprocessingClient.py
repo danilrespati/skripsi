@@ -66,6 +66,8 @@ def setServos(data):
     servo = {"pan":13, "tlt":11}
     lastPan = 0
     lastTlt = 0
+    moveServo(servo["pan"], 0)
+    moveServo(servo["tlt"], 0)
     while True:
         if(abs(data["pan"] - lastPan) >= 0.5):
             moveServo(servo["pan"], data["pan"])
