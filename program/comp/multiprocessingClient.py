@@ -44,22 +44,8 @@ def client():
         time.sleep(0.2)
 
 def moveServo(servo, angle):
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setwarnings(False)
-    GPIO.setup(servo, GPIO.OUT)
-    if (-90 <= angle <= 90):
-        pwm = GPIO.PWM(servo, 50)
-        pwm.start(8)
-        #dutyCycle = ((7*angle)+1350)/180
-        #dutyCycle = angle / 18. + 3.
-        #dutyCycle = angle / 10
-        dutyCycle = ((angle*-1)+126) / 18
-        pwm.ChangeDutyCycle(dutyCycle)
-        time.sleep(2)
-        pwm.stop()
-    else:
-        print("Limit: -90 <= angle <= 90")
-    GPIO.cleanup()
+    os.system("python angleServoCtrl.py " + str(servo) + " " + str(angle))
+    print("[INFO] Positioning servo at GPIO {0} to {1} degrees\n".format(servo, angle))
 
 def setServos(data):
     signal.signal(signal.SIGINT, signal_handler)
