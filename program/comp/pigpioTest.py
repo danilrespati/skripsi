@@ -58,7 +58,7 @@ def setServos(data):
     time.sleep(1)
     while True:
         angle = [data["pan"], data["tlt"]]
-        pulse = [element * (100/9) + 1500 for element in angle]
+        pulse = [-element * (100/9) + 1500 for element in angle]
         pi.set_servo_pulsewidth(servo["pan"], pulse[0])
         time.sleep(0.2)
         pi.set_servo_pulsewidth(servo["tlt"], pulse[1])
