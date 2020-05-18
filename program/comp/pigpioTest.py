@@ -51,7 +51,7 @@ def setServos(data):
     signal.signal(signal.SIGINT, signal_handler)
     servo = {"pan":27, "tlt":17}
     angle = [data["pan"], data["tlt"]]
-    pulse = [element * (100/9) + 1500 for element in angle]
+    pulse = [-element * (100/9) + 1500 for element in angle]
     pi.set_servo_pulsewidth(servo["pan"], 1500)
     time.sleep(0.2)
     pi.set_servo_pulsewidth(servo["tlt"], 1500)
