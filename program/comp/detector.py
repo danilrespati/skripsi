@@ -1,9 +1,9 @@
 '''
 Face detection and tracking with OpenCV
-    ==> Real Time tracking with Pan-Tilt servos 
+    ==> Real Time tracking with Pan-Tilt servos
     Based on original tracking object code developed by Adrian Rosebrock
     Visit original post: https://www.pyimagesearch.com/2016/05/09/opencv-rpi-gpio-and-gpio-zero-on-the-raspberry-pi/
-Developed by Marcelo Rovai - MJRoBot.org @ 9Feb2018 
+Developed by Marcelo Rovai - MJRoBot.org @ 9Feb2018
 '''
 
 # import the necessary packages
@@ -20,14 +20,17 @@ GPIO.setwarnings(False)
 tiltServo = 11
 panServo = 13
 
+
 def drawRectangle(frame, bbox):
     p1 = (int(bbox[0]), int(bbox[1]))
     p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
     cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
 
+
 def drawText(frame, text, x, y):
-    cv2.putText(frame, text, (x, y), 
+    cv2.putText(frame, text, (x, y),
                 cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
+
 
 def initCam():
 	frameWidth = 640
@@ -38,7 +41,8 @@ def initCam():
 	cam.set(4, frameHeight)
 	cam.set(10, brightness)
 	return cam
-	
+
+
 def detectFace(frame):
 	"""
 	Face detection
@@ -54,6 +58,7 @@ def detectFace(frame):
 # faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
 # 		'/data/classifier/lbpcascades'
 # 		'/lbpcascade_frontalface_improved.xml')
+
 
 faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
 		'/data/classifier/haarcascades'
