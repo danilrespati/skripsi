@@ -10,6 +10,7 @@ def initCam():  #initialize pi camera configuration
     cap.set(10, 0.6)
     return cap
  
+cap = initCam()
 # Check if camera opened successfully
 if (cap.isOpened() == False): 
   print("Unable to read camera feed")
