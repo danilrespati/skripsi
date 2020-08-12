@@ -60,6 +60,10 @@ faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
 		'/haarcascade_frontalface_default.xml')
 
 cam = initCam()
+if os.path.exists("/home/pi/skripsi/data/video/static/detector.avi"):
+    os.remove("/home/pi/skripsi/data/video/static/detector.avi")
+rec = cv2.VideoWriter('/home/pi/skripsi/data/video/static/detector.avi', cv2.VideoWriter_fourcc(
+    'M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 stat = 1
 
 while stat:
@@ -75,7 +79,9 @@ while stat:
 	key = cv2.waitKey(1) & 0xFF
 	if key == 27:
 		stat = 0
-		cv2.destroyAllWindows()
+    rec.write(frame)
 		
 print("\n [INFO] Exiting Program and cleanup stuff")
 cam.release()
+rec.release()
+cv2.destroyAllWindows()
