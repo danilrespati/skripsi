@@ -70,6 +70,7 @@ while stat:
 	ret, frame = cam.read()
 	frame = cv2.flip(frame, -1)
 	faces = detectFace(frame)
+    rec.write(frame)
 	for (x,y,w,h) in faces:
 		drawRectangle(frame, bbox=(x,y,w,h))
 		drawText(frame, "Position: {0}, {1}".format(x,y), 10, 10)
@@ -79,7 +80,6 @@ while stat:
 	key = cv2.waitKey(1) & 0xFF
 	if key == 27:
 		stat = 0
-    rec.write(frame)
 		
 print("\n [INFO] Exiting Program and cleanup stuff")
 cam.release()
