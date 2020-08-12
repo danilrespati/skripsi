@@ -15,6 +15,10 @@ def drawRectangle(frame, bbox):
     p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
     cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
 
+faceCascade = cv2.CascadeClassifier('/home/pi/skripsi'
+  '/data/classifier/haarcascades'
+  '/haarcascade_frontalface_default.xml')
+
 cap = initCam()
 # Check if camera opened successfully
 if (cap.isOpened() == False): 
@@ -35,7 +39,7 @@ while(True):
   faces = faceCascade.detectMultiScale(gray, 1.3, 5)
   for(x, y, w, h) in faces:
     drawRectangle(frame, bbox=(x,y,w,h))
-    
+
   if ret == True: 
     # Write the frame into the file 'output.avi'
     out.write(frame)
