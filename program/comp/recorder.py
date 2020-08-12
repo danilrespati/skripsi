@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
- 
+
 def initCam():  #initialize pi camera configuration
     cap = cv2.VideoCapture(0) # Create a VideoCapture object
     frameWidth = 640
@@ -9,7 +9,12 @@ def initCam():  #initialize pi camera configuration
     cap.set(4, frameHeight)
     cap.set(10, 0.6)
     return cap
- 
+
+def drawRectangle(frame, bbox):
+    p1 = (int(bbox[0]), int(bbox[1]))
+    p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+    cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
+
 cap = initCam()
 # Check if camera opened successfully
 if (cap.isOpened() == False): 
@@ -26,7 +31,11 @@ out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (
 while(True):
   ret, frame = cap.read()
   frame = cv2.flip(frame, -1)
- 
+  gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+  faces = faceCascade.detectMultiScale(gray, 1.3, 5)
+  for(x, y, w, h) in faces:
+    drawRectangle(frame, bbox=(x,y,w,h))
+    
   if ret == True: 
     # Write the frame into the file 'output.avi'
     out.write(frame)
